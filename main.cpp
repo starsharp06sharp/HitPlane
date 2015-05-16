@@ -4,7 +4,7 @@
 int main()
 {
     //Create the main window
-    sf::RenderWindow windowMain(sf::VideoMode(240, 400), "Hit Plane By L.Zheng");
+    sf::RenderWindow windowMain(sf::VideoMode(240, 400), "HitPlane By L.Zheng");
 
     //Load Planes's texture from file
     sf::Texture texturePlanes;
