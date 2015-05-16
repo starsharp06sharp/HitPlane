@@ -43,6 +43,7 @@
 		<Linker>
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.3/lib" />
 		</Linker>
+		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
