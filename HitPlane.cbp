@@ -9,11 +9,16 @@
 			<Target title="Debug">
 				<Option output="bin/Debug/HitPlane" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-graphics-d.a" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-window-d.a" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-system-d.a" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/HitPlane" prefix_auto="1" extension_auto="1" />
@@ -25,12 +30,19 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-graphics.a" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-window.a" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-system.a" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.3/include" />
 		</Compiler>
+		<Linker>
+			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.3/lib" />
+		</Linker>
 		<Extensions>
 			<code_completion />
 			<envvars />
