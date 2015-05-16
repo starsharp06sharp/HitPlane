@@ -26,7 +26,7 @@ int main()
                 windowMain.close();
         }
 
-        windowMain.clear();
+        windowMain.clear(sf::Color::Black);
 
         //Draw something on the windowMain
 
