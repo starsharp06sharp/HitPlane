@@ -1,23 +1,36 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    //Create the main window
+    sf::RenderWindow windowMain(sf::VideoMode(240, 400), "Hit Plane By L.Zheng");
 
-    while (window.isOpen())
+    //Create and Play BGM
+    sf::Music musicBGM;
+    if (!musicBGM.openFromFile("TURKY.WAV"))
+    {
+        exit -(1);
+    }
+    musicBGM.setVolume(25);
+    musicBGM.setLoop(true);
+    musicBGM.play();
+
+    //Main loop
+    while (windowMain.isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
+        while (windowMain.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();
+                windowMain.close();
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+        windowMain.clear();
+
+        //Draw something on the windowMain
+
+        windowMain.display();
     }
 
     return 0;

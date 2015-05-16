@@ -38,6 +38,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-l .\bin" />
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.3/include" />
 		</Compiler>
 		<Linker>
