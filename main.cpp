@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <cstdlib>
 
 int main()
 {
@@ -11,6 +12,7 @@ int main()
     if (!texturePlanes.loadFromFile("Planes.png"))
     {
         //Exit when plane's texture is broken
+        system("pause");
         exit(-1);
     }
 
@@ -19,6 +21,7 @@ int main()
      if (!textureBackground.loadFromFile("Background.png"))
     {
         //Exit when plane's texture is broken
+        system("pause");
         exit(-1);
     }
 
@@ -27,6 +30,7 @@ int main()
     if (!musicBGM.openFromFile("TURKY.WAV"))
     {
         //Exit when music file is broken
+        system("pause");
         exit -(1);
     }
     musicBGM.setVolume(25);
@@ -53,7 +57,27 @@ int main()
         {
             //Close window when exit
             if (event.type == sf::Event::Closed)
+            {
                 windowMain.close();
+            }
+
+            //Move player's plane when key preessed
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left)
+            {
+                planePlayer.move(sf::Vector2f(-5, 0));
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right)
+            {
+                planePlayer.move(sf::Vector2f(5, 0));
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up)
+            {
+                planePlayer.move(sf::Vector2f(0, -5));
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down)
+            {
+                planePlayer.move(sf::Vector2f(0, 5));
+            }
         }
 
         windowMain.clear();
