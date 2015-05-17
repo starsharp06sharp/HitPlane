@@ -1,13 +1,13 @@
 #include "Moveable.h"
 
+sf::Texture Moveable::planes;
+
 Moveable::Moveable(
     sf::IntRect aeraToDisplay,
     sf::Vector2f scale,
     sf::Vector2f originPos
     )
 {
-    this-> initTexturePlanes( );
-
     this-> setTexture( planes );
     this-> setTextureRect( aeraToDisplay );
     this-> setScale( scale );

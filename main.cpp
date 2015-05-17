@@ -5,7 +5,6 @@
 #include "Moveable.h"
 
 int main() {
-    //Moveable::initTexturePlanes();
     //Create the main window
     sf::RenderWindow windowMain(sf::VideoMode(240, 400), "HitPlane By L.Zheng");
 
@@ -28,6 +27,8 @@ int main() {
     musicBGM.setLoop(true);
     musicBGM.play();
 
+    //Inital moveable object's texture
+    Moveable::initTexturePlanes();
     //TEMP player
     Moveable player(
         sf::IntRect(0, 99, 102, 126),

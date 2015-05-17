@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 
-typedef sf::Texture TEXTURE;
+#include <iostream>
 
 class Moveable : sf::Sprite {
 public:
@@ -20,7 +20,7 @@ public:
         sf::Vector2f step
     );
 
-    void
+    static void
     initTexturePlanes( void )
     {
         if ( !planes.loadFromFile( "Planes.png" ) ) {
@@ -34,8 +34,9 @@ protected:
 
 private:
 
-    TEXTURE planes;// TODO (zl#1#): Change it into static and solve the undefined question
+    static sf::Texture planes;
 
 };
+
 
 #endif // MOVEABLE_H
