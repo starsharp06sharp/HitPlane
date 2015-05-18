@@ -11,7 +11,7 @@ Moveable::Moveable(
     this-> setTexture( planes );
     this-> setTextureRect( aeraToDisplay );
     this-> setScale( scale );
-    this-> setOrigin( originPos );
+    this-> setPosition( originPos );
 }
 
 void
@@ -21,4 +21,14 @@ Moveable::move(
 {
     // TODO (zl#1#): Add out-of-border judge and fix step driectly
     sf::Sprite::move(step);
+}
+
+void
+Moveable::initTexturePlanes( void )
+{
+    if ( !planes.loadFromFile( "Planes.png" ) ) {
+        //Exit when plane's texture is broken
+        system( "pause" );
+        exit( -1 );
+    }
 }

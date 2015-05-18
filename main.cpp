@@ -1,8 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <iostream>
 #include <cstdlib>
 
 #include "Moveable.h"
+
+sf::Vector2f
+getStepFromKeyboardEvent(
+    sf::Event keyEvent
+    );
 
 int main() {
     //Create the main window
@@ -21,11 +27,16 @@ int main() {
     if (!musicBGM.openFromFile("TURKY.WAV")) {
         //Exit when music file is broken
         system("pause");
-        exit -(1);
+        exit (-1);
     }
     musicBGM.setVolume(25);
     musicBGM.setLoop(true);
     musicBGM.play();
+
+    //Sprite background
+    sf::Sprite spriteBackground;
+    spriteBackground.setTexture(textureBackground);
+    spriteBackground.setScale(sf::Vector2f(0.5f, 0.5f));
 
     //Inital moveable object's texture
     Moveable::initTexturePlanes();
@@ -33,13 +44,10 @@ int main() {
     Moveable player(
         sf::IntRect(0, 99, 102, 126),
         sf::Vector2f(0.5f, 0.5f),
-        sf::Vector2f(-190.f, -670.f)
-    );
-
-    //Sprite background
-    sf::Sprite spriteBackground;
-    spriteBackground.setTexture(textureBackground);
-    spriteBackground.setScale(sf::Vector2f(0.5f, 0.5f));
+        //sf::Vector2f(-190.f, -670.f)
+        sf::Vector2f(96.f, 336.f)
+        //sf::Vector2f(0, 0)
+        );
 
     //Main loop
     while (windowMain.isOpen()) {
@@ -51,17 +59,12 @@ int main() {
             }
 
             //Move player's plane when key preessed
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) {
-                player.move(sf::Vector2f(-16, 0));
-            }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) {
-                player.move(sf::Vector2f(16, 0));
-            }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) {
-                player.move(sf::Vector2f(0, -16));
-            }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) {
-                player.move(sf::Vector2f(0, 16));
+            if (event.type == sf::Event::KeyPressed) {
+                player.move(
+                    getStepFromKeyboardEvent( event )
+                    );
+                sf::Vector2f pos = player.getPosition();
+                std::cout<<'('<<pos.x<<','<<pos.y<<')'<<std::endl;
             }
         }
 
@@ -75,4 +78,32 @@ int main() {
     }
 
     return 0;
+}
+
+sf::Vector2f
+getStepFromKeyboardEvent(
+    sf::Event keyEvent
+    )
+{
+    sf::Vector2f step;
+
+    switch(keyEvent.key.code) {
+    case sf::Keyboard::Up :
+        step = sf::Vector2f(0, -16);
+        break;
+
+    case sf::Keyboard::Down :
+        step = sf::Vector2f(0, 16);
+        break;
+
+    case sf::Keyboard::Left :
+        step = sf::Vector2f(-16, 0);
+        break;
+
+    case sf::Keyboard::Right :
+        step = sf::Vector2f(16, 0);
+        break;
+    }
+
+    return step;
 }
