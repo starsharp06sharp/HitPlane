@@ -44,8 +44,8 @@ int main() {
     Moveable player(
         sf::IntRect(0, 99, 102, 126),
         sf::Vector2f(0.5f, 0.5f),
-        //sf::Vector2f(-190.f, -670.f)
-        sf::Vector2f(96.f, 336.f)
+        sf::Vector2f(-190.f, -670.f)
+        //sf::Vector2f(96.f, 336.f)
         //sf::Vector2f(0, 0)
         );
 
@@ -63,8 +63,9 @@ int main() {
                 player.move(
                     getStepFromKeyboardEvent( event )
                     );
-                sf::Vector2f pos = player.getPosition();
-                std::cout<<'('<<pos.x<<','<<pos.y<<')'<<std::endl;
+                sf::FloatRect gBound = player.getGlobalBounds();
+                std::cout<<'('<<gBound.left<<','<<gBound.top<<')'
+                <<'+'<<'('<<gBound.width<<','<<gBound.height<<')'<<std::endl;
             }
         }
 
@@ -89,19 +90,19 @@ getStepFromKeyboardEvent(
 
     switch(keyEvent.key.code) {
     case sf::Keyboard::Up :
-        step = sf::Vector2f(0, -16);
+        step = sf::Vector2f(0, -8);
         break;
 
     case sf::Keyboard::Down :
-        step = sf::Vector2f(0, 16);
+        step = sf::Vector2f(0, 8);
         break;
 
     case sf::Keyboard::Left :
-        step = sf::Vector2f(-16, 0);
+        step = sf::Vector2f(-8, 0);
         break;
 
     case sf::Keyboard::Right :
-        step = sf::Vector2f(16, 0);
+        step = sf::Vector2f(8, 0);
         break;
     }
 

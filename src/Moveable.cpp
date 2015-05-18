@@ -11,7 +11,7 @@ Moveable::Moveable(
     this-> setTexture( planes );
     this-> setTextureRect( aeraToDisplay );
     this-> setScale( scale );
-    this-> setPosition( originPos );
+    this-> setOrigin( originPos );
 }
 
 void
@@ -19,8 +19,22 @@ Moveable::move(
     sf::Vector2f step
     )
 {
-    // TODO (zl#1#): Add out-of-border judge and fix step driectly
-    sf::Sprite::move(step);
+    float top,bottom;
+    float left,right;
+
+     sf::FloatRect bound = this-> getGlobalBounds();
+
+     top = bound.top;
+     bottom = top + bound.height;
+     left = bound.left;
+     right = left + bound.width;
+
+     if (0.f > top + step.y || bottom + step.y > 400.f)
+        step.y = 0.f;
+     if (0.f > left + step.x || right +step.x > 240.f)
+        step.x = 0.f;
+
+    this-> sf::Sprite::move(step);
 }
 
 void
