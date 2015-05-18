@@ -29,9 +29,9 @@ Moveable::move(
      left = bound.left;
      right = left + bound.width;
 
-     if (0.f > top + step.y || bottom + step.y > 400.f)
+     if (-1.f > top + step.y || bottom + step.y > 406.f)
         step.y = 0.f;
-     if (0.f > left + step.x || right +step.x > 240.f)
+     if (-1.f > left + step.x || right +step.x > 242.f)
         step.x = 0.f;
 
     this-> sf::Sprite::move(step);

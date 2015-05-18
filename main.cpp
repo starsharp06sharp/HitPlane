@@ -65,7 +65,7 @@ int main() {
                     );
                 sf::FloatRect gBound = player.getGlobalBounds();
                 std::cout<<'('<<gBound.left<<','<<gBound.top<<')'
-                <<'+'<<'('<<gBound.width<<','<<gBound.height<<')'<<std::endl;
+                <<','<<'('<<gBound.left+gBound.width<<','<<gBound.top+gBound.height<<')'<<std::endl;
             }
         }
 
