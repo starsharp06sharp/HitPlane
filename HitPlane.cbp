@@ -48,9 +48,13 @@
 		<Linker>
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.3/lib" />
 		</Linker>
+		<Unit filename="include/Bullet.h" />
 		<Unit filename="include/Moveable.h" />
+		<Unit filename="include/Plane.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Bullet.cpp" />
 		<Unit filename="src/Moveable.cpp" />
+		<Unit filename="src/Plane.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
