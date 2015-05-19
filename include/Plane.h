@@ -15,6 +15,9 @@ public:
     int
     judgeOutOfBorder( void );
 
+    void
+    shoot( void );
+
 protected:
 
 private:
