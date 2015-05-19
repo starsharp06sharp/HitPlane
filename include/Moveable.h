@@ -15,11 +15,6 @@ public:
         sf::Vector2f originPos
         );
 
-    void
-    move(
-        sf::Vector2f step
-        );
-
     static void
     initTexturePlanes( void );
 

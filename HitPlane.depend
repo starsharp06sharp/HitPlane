@@ -1,10 +1,13 @@
 # depslib dependency file v1.0
-1431967088 source:d:\runtimeerror\hitplane\main.cpp
+1432050512 source:d:\runtimeerror\hitplane\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
 	<cstdlib>
+	<list>
 	"Moveable.h"
+	"Plane.h"
+	"Bullet.h"
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -487,11 +490,23 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1431967051 source:d:\runtimeerror\hitplane\src\moveable.cpp
+1432036157 source:d:\runtimeerror\hitplane\src\moveable.cpp
 	"Moveable.h"
 
-1431960216 d:\runtimeerror\hitplane\include\moveable.h
+1432036185 d:\runtimeerror\hitplane\include\moveable.h
 	<SFML/Graphics.hpp>
 	<stdlib.h>
 	<iostream>
+
+1432048815 source:d:\runtimeerror\hitplane\src\bullet.cpp
+	"Bullet.h"
+
+1432048798 d:\runtimeerror\hitplane\include\bullet.h
+	"Moveable.h"
+
+1432048141 source:d:\runtimeerror\hitplane\src\plane.cpp
+	"Plane.h"
+
+1432048449 d:\runtimeerror\hitplane\include\plane.h
+	"Moveable.h"
 
