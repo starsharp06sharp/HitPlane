@@ -5,6 +5,7 @@
 
 class Bullet : public Moveable {
 public:
+
     Bullet(
         sf::IntRect aeraToDisplay,
         sf::Vector2f scale,

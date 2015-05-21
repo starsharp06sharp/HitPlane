@@ -5,6 +5,7 @@
 
 class Plane : public Moveable {
 public:
+
     Plane(
         sf::IntRect aeraToDisplay,
         sf::Vector2f scale,
@@ -15,14 +16,11 @@ public:
     int
     judgeOutOfBorder( void );
 
-    void
-    shoot( void );
-
 protected:
 
-private:
-
     int life;
+
+private:
 
 };
 

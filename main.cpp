@@ -3,10 +3,13 @@
 #include <iostream>
 #include <cstdlib>
 #include <list>
+#include <ctime>
 
 #include "Moveable.h"
 #include "Plane.h"
 #include "Bullet.h"
+#include "Player.h"
+#include "Enemy.h"
 
 
 int main( void ) {
@@ -41,17 +44,18 @@ int main( void ) {
     //Inital moveable object's texture
     Moveable::initTexturePlanes();
     //TEMP player
-    Plane player(
+    Player player(
         sf::IntRect(0, 99, 102, 126),
         sf::Vector2f(0.5f, 0.5f),
         sf::Vector2f(96.f, 336.f),
         3
         );
-    //TEMP player's bullet
-    std::list<Bullet> playerBullet;
 
     unsigned NUM=0;
     bool shot;
+    srand( (unsigned)time(NULL) );
+    std::list<Enemy> enemies;
+
     //Main loop
     while (windowMain.isOpen()) {
         sf::Event event;
@@ -70,36 +74,41 @@ int main( void ) {
         }
         if ( !shot && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
             //TEMP playerBullet
-            playerBullet.push_back(
-                Bullet(
-                    sf::IntRect(69, 78, 9, 21),
-                    sf::Vector2f(0.5f, 0.5f),
-                    player.getPosition() + sf::Vector2f(24.f, -10.f),
-                    sf::Vector2f(0, -5)
-                    )
-                );
+            player.shoot();
             shot = true;
         }
 
         windowMain.clear();
 
-        //draw
+        //drawBackground
         windowMain.draw(spriteBackground);
-        windowMain.draw(*(sf::Sprite*)&player);
 
-        //Flash and draw all player's bullet
-        std::list<Bullet>::iterator it;
-        for ( it = playerBullet.begin(); it!=playerBullet.end(); ) {
-            it->flash();
-            if ( it->isDisappear() ) {
-                //Delete when disappear
-                playerBullet.erase( it++ );
-            } else {
-                windowMain.draw( *it );
-                ++it;
-            }
+        //Create , move and draw enemy
+        if( NUM%300 == 0 ) {
+            enemies.push_back(
+                Enemy(
+                    sf::IntRect(534, 612, 57, 43),
+                    sf::Vector2f(0.5f, 0.5f),
+                    sf::Vector2f( rand()%240 - 57*0.5, 0),
+                    1
+                    )
+                );
         }
-        std::cout<<playerBullet.size()<<std::endl;
+        std::for_each(
+            enemies.begin(),
+            enemies.end(),
+            std::mem_fun_ref(&Enemy::flash)
+            );
+        std::for_each(
+            enemies.begin(),
+            enemies.end(),
+            [&](Enemy& enemy) {windowMain.draw(enemy);}
+            );
+
+        //Draw all player bullet and player itself
+        player.flash();
+        player.draw(windowMain);
+
 
 
         windowMain.display();
