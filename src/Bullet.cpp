@@ -19,11 +19,19 @@ Bullet::Bullet(
 void
 Bullet::flash( void )
 {
-    this-> move(speed);
+    this-> move( speed );
 }
 
 bool
 Bullet::isDisappear( void )
 {
     return ! this-> getGlobalBounds().intersects( sf::FloatRect(0.f, 0.f, 240.f, 400.f) );
+}
+
+bool
+Bullet::hit(
+    sf::FloatRect target
+    )
+{
+    return this-> getGlobalBounds().intersects( target );
 }

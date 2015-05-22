@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Plane.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
 class Player : public Plane {
 public:
@@ -18,13 +19,20 @@ public:
         );
 
     void
+    setPosition(
+        sf::Vector2f position
+        );
+
+    void
     shoot( void );
 
     void
     flash( void );
 
     bool
-    hitEnemy( void );
+    hitEnemy(
+        Enemy& enemy
+        );
 
     void
     draw(

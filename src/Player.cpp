@@ -40,7 +40,6 @@ Player::flash( void )
     ammo.remove_if(
         []( Bullet& bullet ) {return bullet.isDisappear();}
         );
-    std::cout<<ammo.size()<<std::endl;
 }
 
 void
@@ -57,4 +56,39 @@ Player::draw(
         );
 //    std::list<Bullet>::iterator it = ammo.begin();
 //    for (; it != )
+}
+
+bool
+Player::hitEnemy(
+    Enemy& enemy
+    )
+{
+    sf::FloatRect enemyRect = enemy.getGlobalBounds();
+    std::list<Bullet>::iterator it = ammo.begin();
+    for ( ;it != ammo.end(); ++it ) {
+        if( it-> hit( enemyRect ) ){
+            ammo.erase( it );
+            return true;
+        }
+    }
+    return false;
+}
+
+void
+Player::setPosition(
+    sf::Vector2f position
+    )
+{
+    sf::Sprite::setPosition(position);
+    int status = judgeOutOfBorder();
+
+    if ( status%3 == 1) position.x = -1.f;
+    else if( status%3 ==2) position.x = 242.f - this-> getGlobalBounds().width;
+
+    status/=3;
+
+    if ( status%3 == 1) position.y = -1.f;
+    else if( status%3 ==2) position.y = 406.f - this-> getGlobalBounds().height;
+
+    sf::Sprite::setPosition(position);
 }

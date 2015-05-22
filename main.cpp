@@ -32,9 +32,29 @@ int main( void ) {
         system("pause");
         exit (-1);
     }
-    musicBGM.setVolume(25);
+    musicBGM.setVolume(100);
     musicBGM.setLoop(true);
     musicBGM.play();
+
+    //Create sound buffer
+    sf::SoundBuffer bufferShoot, bufferExplode;
+    if(!bufferShoot.loadFromFile("bullet.ogg")) {
+        //Exit when sound file is broken
+        system("pause");
+        exit(-1);
+    }
+    if(!bufferExplode.loadFromFile("enemy1_down.ogg")) {
+        //Exit when sound file is broken
+        system("pause");
+        exit(-1);
+    }
+    sf::Sound soundShoot, soundExplode;
+    soundShoot.setBuffer(bufferShoot);
+    soundShoot.setVolume(125);
+    soundExplode.setBuffer(bufferExplode);
+    soundShoot.setVolume(5);
+
+
 
     //Sprite background
     sf::Sprite spriteBackground;
@@ -52,30 +72,30 @@ int main( void ) {
         );
 
     unsigned NUM=0;
-    bool shot;
+    unsigned shootCounter = 0;
     srand( (unsigned)time(NULL) );
     std::list<Enemy> enemies;
 
     //Main loop
     while (windowMain.isOpen()) {
-        sf::Event event;
 
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(windowMain);
+        player.setPosition(sf::Vector2f(mousePosition.x - 24, mousePosition.y - 32));
+
+        sf::Event event;
         while (windowMain.pollEvent(event)) {
             //Close window when exit
             if (event.type == sf::Event::Closed) {
                 windowMain.close();
             }
         }
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(windowMain);
-        player.setPosition(sf::Vector2f(mousePosition.x - 24, mousePosition.y - 32));
 
-        if(NUM%5 == 0) {
-            shot = false;
-        }
-        if ( !shot && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
+        if ( shootCounter >= 20 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
             //TEMP playerBullet
+            soundShoot.setVolume(75);
             player.shoot();
-            shot = true;
+            shootCounter = 0;
+            soundShoot.play();
         }
 
         windowMain.clear();
@@ -84,12 +104,12 @@ int main( void ) {
         windowMain.draw(spriteBackground);
 
         //Create , move and draw enemy
-        if( NUM%300 == 0 ) {
+        if( NUM%60 == 0 ) {
             enemies.push_back(
                 Enemy(
                     sf::IntRect(534, 612, 57, 43),
                     sf::Vector2f(0.5f, 0.5f),
-                    sf::Vector2f( rand()%240 - 57*0.5, 0),
+                    sf::Vector2f( rand()% (int)(240 - 57*0.5), 0),
                     1
                     )
                 );
@@ -98,21 +118,44 @@ int main( void ) {
             enemies.begin(),
             enemies.end(),
             std::mem_fun_ref(&Enemy::flash)
+            //[](Enemy& enemy) {enemy.flash();}
             );
+
+        //Flash all player bullet and player itself
+        player.flash();
+
+        //TEMPLY:Mark all hited planes
+        std::for_each(
+            enemies.begin(),
+            enemies.end(),
+            [&](Enemy& enemy)
+            {
+                if ( player.hitEnemy( enemy ) ) {
+                    enemy.getKilled();
+                    soundExplode.play();
+                }
+            }
+            );
+
+        //TEMPLY:Destory all marked planes
+        enemies.remove_if(
+            std::mem_fun_ref(&Enemy::isDead)
+            );
+
+        //Draw all player bullet and player itself
+        player.draw(windowMain);
+        //Draw all enemy
         std::for_each(
             enemies.begin(),
             enemies.end(),
             [&](Enemy& enemy) {windowMain.draw(enemy);}
             );
 
-        //Draw all player bullet and player itself
-        player.flash();
-        player.draw(windowMain);
-
 
 
         windowMain.display();
         NUM++;
+        shootCounter++;
     }
 
     return 0;

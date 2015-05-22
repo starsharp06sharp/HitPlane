@@ -20,10 +20,13 @@ public:
     flash( void );
 
     void
-    shoot( void );
+    getKilled( void );
 
     bool
-    isDisappear( void );
+    isDead( void );
+
+    void
+    shoot( void );
 
     static void
     flashAmmo( void );
@@ -35,6 +38,8 @@ private:
     static std::list<Bullet> ammo;
 
     sf::Vector2f speed;
+
+    bool dead;
 
 };
 

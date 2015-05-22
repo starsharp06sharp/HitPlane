@@ -19,9 +19,9 @@ Plane::Plane(
 int
  Plane::judgeOutOfBorder( void )
 /*
-*This function returns a two-bit binary numbers
+*This function returns a two-bit ternary numbers
 *that each bit repestent the x-pos or y-pos
-*is corss the border or not.
+*is corss the border or not.(left border:1, right border:2)
 */
  {
     int ans=0;
@@ -35,9 +35,11 @@ int
     left = bound.left;
     right = left + bound.width;
 
-    if ( left <-1.f || 242.f < right ) ans++;
+    if ( left <-1.f ) ans++;
+    else if ( 242.f < right ) ans+=2;
 
-    if ( top < -1.f || 406.f < bottom ) ans+=2;
+    if ( top < -1.f ) ans+=3;
+    else if ( 406.f < bottom ) ans+=6;
 
     return ans;
  }

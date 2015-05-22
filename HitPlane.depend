@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1432221127 source:d:\runtimeerror\hitplane\main.cpp
+1432303768 source:d:\runtimeerror\hitplane\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -501,32 +501,33 @@
 	<stdlib.h>
 	<iostream>
 
-1432200759 source:d:\runtimeerror\hitplane\src\bullet.cpp
+1432280406 source:d:\runtimeerror\hitplane\src\bullet.cpp
 	"Bullet.h"
 
-1432209117 d:\runtimeerror\hitplane\include\bullet.h
+1432278361 d:\runtimeerror\hitplane\include\bullet.h
 	"Moveable.h"
 
-1432048141 source:d:\runtimeerror\hitplane\src\plane.cpp
+1432302768 source:d:\runtimeerror\hitplane\src\plane.cpp
 	"Plane.h"
 
 1432216575 d:\runtimeerror\hitplane\include\plane.h
 	"Moveable.h"
 
-1432214770 source:d:\runtimeerror\hitplane\src\player.cpp
+1432303794 source:d:\runtimeerror\hitplane\src\player.cpp
 	"Player.h"
 
-1432213915 d:\runtimeerror\hitplane\include\player.h
+1432303039 d:\runtimeerror\hitplane\include\player.h
 	<list>
 	<functional>
 	<SFML/Graphics.hpp>
 	"Plane.h"
 	"Bullet.h"
-
-1432219056 source:d:\runtimeerror\hitplane\src\enemy.cpp
 	"Enemy.h"
 
-1432221138 d:\runtimeerror\hitplane\include\enemy.h
+1432279556 source:d:\runtimeerror\hitplane\src\enemy.cpp
+	"Enemy.h"
+
+1432279556 d:\runtimeerror\hitplane\include\enemy.h
 	<list>
 	"Plane.h"
 	"Bullet.h"

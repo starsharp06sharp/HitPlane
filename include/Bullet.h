@@ -19,6 +19,11 @@ public:
     bool
     isDisappear( void );
 
+    bool
+    hit(
+        sf::FloatRect target
+        );
+
 protected:
 
 private:
