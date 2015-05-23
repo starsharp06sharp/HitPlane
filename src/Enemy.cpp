@@ -1,23 +1,27 @@
 #include "Enemy.h"
 
+sf::SoundBuffer Enemy::bufferExplode[3];
+sf::Sound Enemy::soundExplode[3];
+
 std::list<Bullet> Enemy::ammo;
 
 Enemy::Enemy(
-    sf::IntRect aeraToDisplay,
+    enemyStyle enemyNo,
     sf::Vector2f scale,
-    sf::Vector2f originPos,
-    int life
+    sf::Vector2f originPos
     ) :
+        enemyNo( enemyNo ),
         Plane(
-            aeraToDisplay,
+            livePlaneToDisplay [ enemyNo ] [ maxLife [ enemyNo ] ],//aeraToDisplay
             scale,
             originPos,
-            life
+            maxLife [ enemyNo ]//life
             ),
         speed(
             sf::Vector2f(0, 0.3)
             ),
-        dead ( false )
+        deadCounter( 0 ),
+        disappear( false )
 {
     //Do nothing
 }
@@ -25,17 +29,56 @@ Enemy::Enemy(
 void
 Enemy::flash( void )
 {
-    this-> move(speed);
+    if ( deadCounter <= 0 ) {
+        this-> move(speed);
+    } else {
+        if (deadDelayConuter == deadDelaySpeed[enemyNo]) {
+            this-> setTextureRect(
+                deadPlaneToDisplay [enemyNo] [deadCounter]
+                );
+            if( deadCounter++ > 4 ) this-> disappear = true;
+        deadDelayConuter=0;
+        } else deadDelayConuter++;
+    }
 }
 
 void
-Enemy::getKilled( void )
+Enemy::getHit( void )
 {
-    dead = true;
+    life--;
+    if ( life > 0 ) {
+        this-> setTextureRect(
+            livePlaneToDisplay [enemyNo] [life]
+            );
+    } else if ( life == 0 ) {
+        deadCounter = 1;
+        soundExplode[enemyNo].play();
+        deadDelayConuter = 0;
+    }
 }
 
 bool
-Enemy::isDead( void )
+Enemy::isDisappear( void )
 {
-    return dead;
+    return disappear;
+}
+
+void
+Enemy::initSound( void )
+{
+    char soundFileName[] = "enemy1_down.ogg";
+    for (int i = enemy1;
+           i <= enemy2;
+           i++
+          )
+    {
+        soundFileName[5] = '1' + i;
+        if( !bufferExplode[i].loadFromFile(soundFileName) ) {
+            //Exit when sound file is broken
+            system("pause");
+            exit(-1);
+        }
+        soundExplode[i].setBuffer(bufferExplode[i]);
+        soundExplode[i].setVolume(100);
+    }
 }

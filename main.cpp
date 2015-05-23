@@ -37,22 +37,16 @@ int main( void ) {
     musicBGM.play();
 
     //Create sound buffer
-    sf::SoundBuffer bufferShoot, bufferExplode;
-    if(!bufferShoot.loadFromFile("bullet.ogg")) {
-        //Exit when sound file is broken
-        system("pause");
-        exit(-1);
-    }
+    Bullet::initSound();
+    Enemy::initSound();
+    sf::SoundBuffer bufferExplode;
     if(!bufferExplode.loadFromFile("enemy1_down.ogg")) {
         //Exit when sound file is broken
         system("pause");
         exit(-1);
     }
-    sf::Sound soundShoot, soundExplode;
-    soundShoot.setBuffer(bufferShoot);
-    soundShoot.setVolume(125);
+    sf::Sound soundExplode;
     soundExplode.setBuffer(bufferExplode);
-    soundShoot.setVolume(5);
 
 
 
@@ -71,16 +65,14 @@ int main( void ) {
         3
         );
 
-    unsigned NUM=0;
+    unsigned enemy1Counter = 0;
+    unsigned enemy2Counter = 0;
     unsigned shootCounter = 0;
     srand( (unsigned)time(NULL) );
     std::list<Enemy> enemies;
 
     //Main loop
     while (windowMain.isOpen()) {
-
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(windowMain);
-        player.setPosition(sf::Vector2f(mousePosition.x - 24, mousePosition.y - 32));
 
         sf::Event event;
         while (windowMain.pollEvent(event)) {
@@ -90,29 +82,31 @@ int main( void ) {
             }
         }
 
-        if ( shootCounter >= 20 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
-            //TEMP playerBullet
-            soundShoot.setVolume(75);
-            player.shoot();
-            shootCounter = 0;
-            soundShoot.play();
-        }
-
         windowMain.clear();
 
         //drawBackground
         windowMain.draw(spriteBackground);
 
-        //Create , move and draw enemy
-        if( NUM%60 == 0 ) {
+        //Create and move enemy
+        if( enemy1Counter == 60 ) {
             enemies.push_back(
                 Enemy(
-                    sf::IntRect(534, 612, 57, 43),
+                    enemy1,
                     sf::Vector2f(0.5f, 0.5f),
-                    sf::Vector2f( rand()% (int)(240 - 57*0.5), 0),
-                    1
+                    sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
                     )
                 );
+            enemy1Counter = 0;
+        }
+        if ( enemy2Counter == 300 ) {
+            enemies.push_back(
+                Enemy(
+                    enemy2,
+                    sf::Vector2f(0.5f, 0.5f),
+                    sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
+                    )
+                );
+            enemy2Counter = 0;
         }
         std::for_each(
             enemies.begin(),
@@ -120,6 +114,18 @@ int main( void ) {
             std::mem_fun_ref(&Enemy::flash)
             //[](Enemy& enemy) {enemy.flash();}
             );
+
+        //Todo: enemy shoot and flash enemy'sAmmo
+
+        //Move player
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(windowMain);
+        player.setPosition(sf::Vector2f(mousePosition.x - 24, mousePosition.y - 32));
+
+        //Player shoot
+        if ( shootCounter >= 20 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
+            player.shoot();
+            shootCounter = 0;
+        }
 
         //Flash all player bullet and player itself
         player.flash();
@@ -131,15 +137,15 @@ int main( void ) {
             [&](Enemy& enemy)
             {
                 if ( player.hitEnemy( enemy ) ) {
-                    enemy.getKilled();
-                    soundExplode.play();
+                    enemy.getHit();
+                    //soundExplode.play();
                 }
             }
             );
 
         //TEMPLY:Destory all marked planes
         enemies.remove_if(
-            std::mem_fun_ref(&Enemy::isDead)
+            [](Enemy& enemy) {return enemy.isDisappear();}
             );
 
         //Draw all player bullet and player itself
@@ -151,10 +157,9 @@ int main( void ) {
             [&](Enemy& enemy) {windowMain.draw(enemy);}
             );
 
-
-
         windowMain.display();
-        NUM++;
+        enemy1Counter++;
+        enemy2Counter++;
         shootCounter++;
     }
 

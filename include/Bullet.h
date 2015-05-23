@@ -1,6 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#include <SFML/Audio.hpp>
 #include "Moveable.h"
 
 class Bullet : public Moveable {
@@ -12,6 +13,9 @@ public:
         sf::Vector2f originPos,
         sf::Vector2f speed
     );
+
+    static void
+    initSound( void );
 
     void
     flash( void );
@@ -29,6 +33,10 @@ protected:
 private:
 
     sf::Vector2f speed;
+
+    static sf::SoundBuffer bufferShoot;
+
+    static sf::Sound soundShoot;
 
 };
 

@@ -1,5 +1,8 @@
 #include "Bullet.h"
 
+sf::SoundBuffer Bullet::bufferShoot;
+sf::Sound Bullet::soundShoot;
+
 Bullet::Bullet(
     sf::IntRect aeraToDisplay,
     sf::Vector2f scale,
@@ -13,7 +16,7 @@ Bullet::Bullet(
             ),
         speed(speed)
 {
-    //Do nothing
+    this-> soundShoot.play();
 }
 
 void
@@ -34,4 +37,16 @@ Bullet::hit(
     )
 {
     return this-> getGlobalBounds().intersects( target );
+}
+
+void
+Bullet::initSound( void )
+{
+    if(!bufferShoot.loadFromFile("bullet.ogg")) {
+        //Exit when sound file is broken
+        system("pause");
+        exit(-1);
+    }
+    soundShoot.setBuffer(bufferShoot);
+    soundShoot.setVolume(125);
 }
