@@ -31,6 +31,7 @@ Enemy::flash( void )
 {
     if ( deadCounter <= 0 ) {
         this-> move(speed);
+        if ( this-> judgeOutOfBorder() >= 6 ) this-> disappear = true;
     } else {
         if (deadDelayConuter == deadDelaySpeed[enemyNo]) {
             this-> setTextureRect(
@@ -81,4 +82,16 @@ Enemy::initSound( void )
         soundExplode[i].setBuffer(bufferExplode[i]);
         soundExplode[i].setVolume(100);
     }
+}
+
+enemyStyle
+Enemy::getEnemyNo( void )
+{
+    return enemyNo;
+}
+
+bool
+Enemy::isDead( void )
+{
+    return ( life <= 0 );
 }

@@ -13,6 +13,8 @@ enum enemyStyle {
 
 const int maxLife[] ={ 1, 2, 4 };
 
+const int deadScore[] = { 1, 5, 100 };
+
 const sf::IntRect livePlaneToDisplay[][7] =
 /*
 *This array storge the position rectangle in texture
@@ -70,11 +72,17 @@ public:
     static void
     initSound( void );
 
+    enemyStyle
+    getEnemyNo( void );
+
     void
     flash( void );
 
     void
     getHit( void );
+
+    bool
+    isDead( void );
 
     bool
     isDisappear( void );

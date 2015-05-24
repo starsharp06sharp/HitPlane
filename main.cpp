@@ -25,6 +25,12 @@ int main( void ) {
         exit(-1);
     }
 
+    //Sprite background
+    sf::Sprite spriteBackground;
+    spriteBackground.setTexture(textureBackground);
+    spriteBackground.setScale(sf::Vector2f(0.5f, 0.5f));
+
+
     //Create and Play BGM
     sf::Music musicBGM;
     if (!musicBGM.openFromFile("TURKY.WAV")) {
@@ -36,28 +42,25 @@ int main( void ) {
     musicBGM.setLoop(true);
     musicBGM.play();
 
-    //Create sound buffer
+    //Init sound effect of ecah object
     Bullet::initSound();
     Enemy::initSound();
-    sf::SoundBuffer bufferExplode;
-    if(!bufferExplode.loadFromFile("enemy1_down.ogg")) {
-        //Exit when sound file is broken
-        system("pause");
-        exit(-1);
+
+    //Load font from file
+    sf::Font font;
+    if ( !font.loadFromFile("LHANDW.TTF") ) {
+        system( "pause" );
+        exit( -1 );
     }
-    sf::Sound soundExplode;
-    soundExplode.setBuffer(bufferExplode);
-
-
-
-    //Sprite background
-    sf::Sprite spriteBackground;
-    spriteBackground.setTexture(textureBackground);
-    spriteBackground.setScale(sf::Vector2f(0.5f, 0.5f));
+    //Init score text
+    sf::Text scoreText;
+    scoreText.setFont( font );
+    scoreText.setCharacterSize( 18 );
+    scoreText.setColor( sf::Color::Blue );
 
     //Inital moveable object's texture
     Moveable::initTexturePlanes();
-    //TEMP player
+    //Init player
     Player player(
         sf::IntRect(0, 99, 102, 126),
         sf::Vector2f(0.5f, 0.5f),
@@ -65,6 +68,7 @@ int main( void ) {
         3
         );
 
+    unsigned long long score = 0xffffffffffffffff;
     unsigned enemy1Counter = 0;
     unsigned enemy2Counter = 0;
     unsigned shootCounter = 0;
@@ -138,7 +142,9 @@ int main( void ) {
             {
                 if ( player.hitEnemy( enemy ) ) {
                     enemy.getHit();
-                    //soundExplode.play();
+                    if ( enemy.isDead() ) {
+                        score+=deadScore [ enemy.getEnemyNo() ];
+                    }
                 }
             }
             );
@@ -154,8 +160,16 @@ int main( void ) {
         std::for_each(
             enemies.begin(),
             enemies.end(),
-            [&](Enemy& enemy) {windowMain.draw(enemy);}
+            [&](Enemy& enemy) {
+                windowMain.draw(enemy);
+            }
             );
+
+        //Draw score
+        char scoreStr[40];
+        sprintf( scoreStr, "Score : %I64u", score );
+        scoreText.setString( scoreStr );
+        windowMain.draw( scoreText );
 
         windowMain.display();
         enemy1Counter++;
