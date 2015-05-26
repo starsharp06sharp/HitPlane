@@ -8,6 +8,8 @@
 #include "Bullet.h"
 #include "Enemy.h"
 
+class Enemy;
+
 class Player : public Plane {
 public:
 
@@ -17,6 +19,9 @@ public:
         sf::Vector2f originPos,
         int life
         );
+
+    sf::Vector2f
+    getCenter( void );
 
     void
     setPosition(

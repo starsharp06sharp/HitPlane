@@ -92,3 +92,13 @@ Player::setPosition(
 
     sf::Sprite::setPosition(position);
 }
+
+sf::Vector2f
+Player::getCenter( void )
+{
+    sf::FloatRect myBound = this->getGlobalBounds();
+    return sf::Vector2f(
+        myBound.left + myBound.width / 2,
+        myBound.top + myBound.height / 2
+        );
+}

@@ -68,7 +68,7 @@ int main( void ) {
         3
         );
 
-    unsigned long long score = 0xffffffffffffffff;
+    unsigned long long score = 0;
     unsigned enemy1Counter = 0;
     unsigned enemy2Counter = 0;
     unsigned shootCounter = 0;
@@ -91,8 +91,8 @@ int main( void ) {
         //drawBackground
         windowMain.draw(spriteBackground);
 
-        //Create and move enemy
-        if( enemy1Counter == 60 ) {
+        //Create enemy1
+        if( enemy1Counter == 120 ) {
             enemies.push_back(
                 Enemy(
                     enemy1,
@@ -102,7 +102,9 @@ int main( void ) {
                 );
             enemy1Counter = 0;
         }
-        if ( enemy2Counter == 300 ) {
+
+        //Create enemy2
+        if ( enemy2Counter == 600 ) {
             enemies.push_back(
                 Enemy(
                     enemy2,
@@ -112,6 +114,8 @@ int main( void ) {
                 );
             enemy2Counter = 0;
         }
+
+        //Flash enemy
         std::for_each(
             enemies.begin(),
             enemies.end(),
@@ -120,6 +124,15 @@ int main( void ) {
             );
 
         //Todo: enemy shoot and flash enemy'sAmmo
+        std::for_each(
+            enemies.begin(),
+            enemies.end(),
+            [&player](Enemy& enemy){
+                enemy.shoot(player);
+            }
+            );
+        Enemy::flashAmmo();
+
 
         //Move player
         sf::Vector2i mousePosition = sf::Mouse::getPosition(windowMain);
@@ -154,8 +167,6 @@ int main( void ) {
             [](Enemy& enemy) {return enemy.isDisappear();}
             );
 
-        //Draw all player bullet and player itself
-        player.draw(windowMain);
         //Draw all enemy
         std::for_each(
             enemies.begin(),
@@ -164,6 +175,12 @@ int main( void ) {
                 windowMain.draw(enemy);
             }
             );
+
+        //Draw all enemy bullet
+        Enemy::drawAllBullet( windowMain );
+
+        //Draw all player bullet and player itself
+        player.draw(windowMain);
 
         //Draw score
         char scoreStr[40];

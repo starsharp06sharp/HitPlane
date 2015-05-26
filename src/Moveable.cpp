@@ -5,13 +5,15 @@ sf::Texture Moveable::planes;
 Moveable::Moveable(
     sf::IntRect aeraToDisplay,
     sf::Vector2f scale,
-    sf::Vector2f originPos
+    sf::Vector2f originPos,
+    float angle
     )
 {
     this-> setTexture( planes );
     this-> setTextureRect( aeraToDisplay );
     this-> setScale( scale );
     this-> setPosition( originPos );
+    this-> setRotation( angle );
 }
 
 void

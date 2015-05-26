@@ -11,7 +11,8 @@ public:
         sf::IntRect aeraToDisplay,
         sf::Vector2f scale,
         sf::Vector2f originPos,
-        sf::Vector2f speed
+        sf::Vector2f speed,
+        float angle = 0.f
     );
 
     static void

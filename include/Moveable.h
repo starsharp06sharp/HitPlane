@@ -12,7 +12,8 @@ public:
     Moveable(
         sf::IntRect aeraToDisplay,
         sf::Vector2f scale,
-        sf::Vector2f originPos
+        sf::Vector2f originPos,
+        float angle = 0.f
         );
 
     static void

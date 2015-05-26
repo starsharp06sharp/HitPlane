@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include <list>
+#include "Player.h"
 #include "Plane.h"
 #include "Bullet.h"
 
@@ -14,6 +15,8 @@ enum enemyStyle {
 const int maxLife[] ={ 1, 2, 4 };
 
 const int deadScore[] = { 1, 5, 100 };
+
+const int shootInterval[] = {100, 100, 50};
 
 const sf::IntRect livePlaneToDisplay[][7] =
 /*
@@ -58,7 +61,9 @@ const sf::IntRect deadPlaneToDisplay[][7] =
     }
 };
 
-const int deadDelaySpeed[] = { 3, 6 };
+const int deadDelaySpeed[] = { 5, 8 };
+
+class Player;
 
 class Enemy : public Plane {
 public:
@@ -88,10 +93,13 @@ public:
     isDisappear( void );
 
     void
-    shoot( void );
+    shoot( Player& player );
 
     static void
     flashAmmo( void );
+
+    static void
+    drawAllBullet( sf::RenderWindow& window );
 
 protected:
 
@@ -115,7 +123,13 @@ private:
     int deadDelayConuter;
     /*
     *This counter can control the speed of explode action.
-    Every to number play one frame.
+    *Every to number play one frame.
+    */
+
+    int shootCounter;
+    /*
+    *This counter control the shoot frequency of the enemy.
+    *The frequency depends on the array shootInterval[]
     */
 
     static sf::SoundBuffer bufferExplode[3];

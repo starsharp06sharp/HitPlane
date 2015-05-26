@@ -1,4 +1,7 @@
+#include <cmath>
 #include "Enemy.h"
+
+#define PI 3.1415926
 
 sf::SoundBuffer Enemy::bufferExplode[3];
 sf::Sound Enemy::soundExplode[3];
@@ -10,17 +13,18 @@ Enemy::Enemy(
     sf::Vector2f scale,
     sf::Vector2f originPos
     ) :
-        enemyNo( enemyNo ),
         Plane(
             livePlaneToDisplay [ enemyNo ] [ maxLife [ enemyNo ] ],//aeraToDisplay
             scale,
             originPos,
             maxLife [ enemyNo ]//life
             ),
+        enemyNo( enemyNo ),
         speed(
             sf::Vector2f(0, 0.3)
             ),
         deadCounter( 0 ),
+        shootCounter( 0 ),
         disappear( false )
 {
     //Do nothing
@@ -94,4 +98,70 @@ bool
 Enemy::isDead( void )
 {
     return ( life <= 0 );
+}
+
+void
+Enemy::shoot( Player& player )
+{
+    shootCounter++;
+    if ( shootCounter < shootInterval[enemyNo] ) return;
+    if ( this->isDead() ) return;
+
+    shootCounter = 0;
+
+    sf::FloatRect myBound = this-> getGlobalBounds();
+    sf::Vector2f myPosition;
+    myPosition = sf::Vector2f(
+        myBound.left + myBound.width / 2,
+        myBound.top +myBound.height
+        );
+
+    sf::Vector2f bulletSpeed;
+    double theta = 0;
+    if ( enemyNo == enemy1 ) {
+        bulletSpeed = sf::Vector2f(0, 2);
+    } else if ( enemyNo == enemy2 ) {
+        float deltaX, deltaY;
+        deltaX = myPosition.x - player.getCenter().x;
+        deltaY = myPosition.y - player.getCenter().y;
+        theta = atan( deltaX / deltaY );
+        if ( deltaY>0 ) theta += PI;
+        bulletSpeed = sf::Vector2f( 2*sin(theta), 2*cos(theta) );
+        theta = -theta * 360 /(2*PI);
+    }
+
+    ammo.push_back(
+        Bullet(
+            sf::IntRect(1004, 987, 9, 21),
+            sf::Vector2f(0.5f, 0.5f),
+            myPosition,
+            bulletSpeed,
+            theta
+            )
+        );
+}
+
+void
+Enemy::drawAllBullet( sf::RenderWindow& window )
+{
+    std::for_each(
+        ammo.begin(),
+        ammo.end(),
+        [&window](Bullet& bullet) {
+                  window.draw( bullet );
+            }
+        );
+}
+
+void
+Enemy::flashAmmo( void )
+{
+    std::for_each(
+        ammo.begin(),
+        ammo.end(),
+        [](Bullet& bullet) {bullet.flash();}
+        );
+    ammo.remove_if(
+        []( Bullet& bullet ) {return bullet.isDisappear();}
+        );
 }
