@@ -1,7 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <iostream>
-#include <cstdlib>
 #include <list>
 #include <ctime>
 
@@ -21,7 +19,7 @@ int main( void ) {
     sf::Texture textureBackground;
     if (!textureBackground.loadFromFile("Background.png")) {
         //Exit when plane's texture is broken
-        system("pause");
+        //system("pause");
         exit(-1);
     }
 
@@ -35,7 +33,7 @@ int main( void ) {
     sf::Music musicBGM;
     if (!musicBGM.openFromFile("TURKY.WAV")) {
         //Exit when music file is broken
-        system("pause");
+        //system("pause");
         exit (-1);
     }
     musicBGM.setVolume(100);

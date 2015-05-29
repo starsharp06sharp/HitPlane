@@ -46,7 +46,7 @@ Bullet::initSound( void )
 {
     if(!bufferShoot.loadFromFile("bullet.ogg")) {
         //Exit when sound file is broken
-        system("pause");
+        //system("pause");
         exit(-1);
     }
     soundShoot.setBuffer(bufferShoot);

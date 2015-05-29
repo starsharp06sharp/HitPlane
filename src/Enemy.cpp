@@ -143,7 +143,7 @@ Enemy::initSound( void )
         soundFileName[5] = '1' + i;
         if( !bufferExplode[i].loadFromFile(soundFileName) ) {
             //Exit when sound file is broken
-            system("pause");
+            //system("pause");
             exit(-1);
         }
         soundExplode[i].setBuffer(bufferExplode[i]);
