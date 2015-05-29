@@ -9,6 +9,8 @@
 class Moveable : public sf::Sprite {
 public:
 
+    Moveable() {}
+
     Moveable(
         sf::IntRect aeraToDisplay,
         sf::Vector2f scale,

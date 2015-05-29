@@ -97,12 +97,14 @@ Enemy::flash( void )
 
         if (deadDelayConuter == deadDelaySpeed[enemyNo]) {
 
-            if( deadCounter++ > 4 ) this-> disappear = true;
-            this-> setTextureRect(
-                deadPlaneToDisplay [enemyNo] [deadCounter]
-                );
+            if( deadCounter++ > 4 )
+                this-> disappear = true;
+            else {
+                this-> setTextureRect(
+                    deadPlaneToDisplay [enemyNo] [deadCounter]
+                    );
+            }
             deadDelayConuter=0;
-
         } else
             deadDelayConuter++;
     }
@@ -126,7 +128,7 @@ Enemy::getHit( void )
 bool
 Enemy::isDisappear( void )
 {
-    return disappear;
+    return this->disappear;
 }
 
 void
@@ -261,4 +263,10 @@ Enemy::hitPlayer(Player& player)
     }
 
     return false;
+}
+
+void
+Enemy::clearBullet( void )
+{
+    ammo.clear();
 }

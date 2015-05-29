@@ -29,6 +29,9 @@ public:
     static void
     initSound( void );
 
+    static void
+    clearBullet( void );
+
     enemyStyle
     getEnemyNo( void );
 

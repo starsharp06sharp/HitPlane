@@ -13,6 +13,8 @@ class Enemy;
 class Player : public Plane {
 public:
 
+    Player() {}
+
     Player(
         sf::IntRect aeraToDisplay,
         sf::Vector2f scale,
@@ -56,6 +58,12 @@ public:
         sf::RenderWindow& window
         );
 
+    int
+    getLife( void );
+
+    void
+    addLife( void );
+
 protected:
 
 private:
@@ -78,6 +86,10 @@ private:
     static sf::SoundBuffer bufferExplode;
 
     static sf::Sound soundExplode;
+
+    static sf::SoundBuffer bufferGetHit;
+
+    static sf::Sound soundGetHit;
 
 };
 

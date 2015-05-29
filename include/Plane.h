@@ -6,6 +6,8 @@
 class Plane : public Moveable {
 public:
 
+    Plane() {}
+
     Plane(
         sf::IntRect aeraToDisplay,
         sf::Vector2f scale,

@@ -30,6 +30,9 @@ const sf::IntRect deadPlaneToDisplay[] =
 sf::SoundBuffer Player::bufferExplode;
 sf::Sound Player::soundExplode;
 
+sf::SoundBuffer Player::bufferGetHit;
+sf::Sound Player::soundGetHit;
+
 Player::Player(
     sf::IntRect aeraToDisplay,
     sf::Vector2f scale,
@@ -41,7 +44,8 @@ Player::Player(
             scale,
             originPos,
             life
-            )
+            ),
+        deadCounter( 0 )
 {
     //Do nothing
 }
@@ -49,6 +53,14 @@ Player::Player(
 void
 Player::initSound( void )
 {
+    if( !bufferGetHit.loadFromFile("get_hit.ogg") ) {
+        //Exit when sound file is broken
+        system("pause");
+        exit(-1);
+    }
+    soundGetHit.setBuffer(bufferGetHit);
+    soundGetHit.setVolume(100);
+
     if( !bufferExplode.loadFromFile("game_over.ogg") ) {
         //Exit when sound file is broken
         system("pause");
@@ -82,6 +94,20 @@ Player::flash( void )
     ammo.remove_if(
         []( Bullet& bullet ) {return bullet.isDisappear();}
         );
+
+    if( deadCounter > 0 ) {
+        if( deadDelayConuter == 10 ) {
+            if( deadCounter++ > 4 )
+                this-> disappear = true;
+            else {
+                this-> setTextureRect(
+                    deadPlaneToDisplay [deadCounter]
+                    );
+            }
+            deadDelayConuter = 0;
+        } else
+            deadDelayConuter++;
+    }
 }
 
 void
@@ -123,6 +149,7 @@ Player::setPosition(
     sf::Vector2f position
     )
 {
+    if ( life <= 0 ) return;
     sf::Sprite::setPosition( position );
     int status = judgeOutOfBorder();
 
@@ -156,14 +183,14 @@ Player::isDead( void )
 bool
 Player::isDisappear( void )
 {
-    return disappear;
+    return this->disappear;
 }
 
 void
 Player::getHit( void )
 {
     life--;
-    std::cout<<life<<std::endl;
+    soundGetHit.play();
     if ( life > 0 ) {
         this-> setTextureRect(
             livePlaneToDisplay[life]
@@ -173,4 +200,16 @@ Player::getHit( void )
         soundExplode.play();
         deadDelayConuter = 0;
     }
+}
+
+int
+Player::getLife( void )
+{
+    return this->life;
+}
+
+void
+Player::addLife( void )
+{
+    life++;
 }

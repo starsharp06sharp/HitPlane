@@ -40,166 +40,260 @@ int main( void ) {
     }
     musicBGM.setVolume(100);
     musicBGM.setLoop(true);
-    musicBGM.play();
 
     //Init sound effect of ecah object
     Bullet::initSound();
     Enemy::initSound();
+    Player::initSound();
 
     //Load font from file
-    sf::Font font;
-    if ( !font.loadFromFile("LHANDW.TTF") ) {
+    sf::Font promptFont;
+    if ( !promptFont.loadFromFile("courbd.ttf") ) {
         system( "pause" );
         exit( -1 );
     }
-    //Init score text
+    sf::Font scoreFont;
+    if ( !scoreFont.loadFromFile("LHANDW.TTF") ){
+        system( "pause" );
+        exit( -1 );
+    }
+
+    //Init score&life text
     sf::Text scoreText;
-    scoreText.setFont( font );
+    scoreText.setFont( scoreFont );
     scoreText.setCharacterSize( 18 );
     scoreText.setColor( sf::Color::Blue );
+    //Init life text
+    sf::Text lifeText;
+    lifeText.setFont( promptFont );
+    lifeText.setCharacterSize( 30 );
+    lifeText.setColor( sf::Color::Red );
 
     //Inital moveable object's texture
     Moveable::initTexture();
     //Init player
-    Player player(
-        sf::IntRect(0, 99, 102, 126),
-        sf::Vector2f(0.5f, 0.5f),
-        sf::Vector2f(96.f, 336.f),
-        3
-        );
+    Player player;
 
-    unsigned long long score = 0;
-    unsigned enemy1Counter = 0;
-    unsigned enemy2Counter = 0;
-    unsigned shootCounter = 0;
-    srand( (unsigned)time(NULL) );
+    unsigned long long score;
+    unsigned enemy1Counter;
+    unsigned enemy2Counter;
+    unsigned shootCounter;
     std::list<Enemy> enemies;
 
-    //Main loop
-    while (windowMain.isOpen()) {
+    bool start = true;
 
-        sf::Event event;
-        while (windowMain.pollEvent(event)) {
-            //Close window when exit
-            if (event.type == sf::Event::Closed) {
-                windowMain.close();
-            }
-        }
-
-        windowMain.clear();
-
-        //drawBackground
-        windowMain.draw(spriteBackground);
-
-        //Create enemy1
-        if( enemy1Counter == 120 ) {
-            enemies.push_back(
-                Enemy(
-                    enemy1,
-                    sf::Vector2f(0.5f, 0.5f),
-                    sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
-                    )
-                );
-            enemy1Counter = 0;
-        }
-
-        //Create enemy2
-        if ( enemy2Counter == 600 ) {
-            enemies.push_back(
-                Enemy(
-                    enemy2,
-                    sf::Vector2f(0.5f, 0.5f),
-                    sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
-                    )
-                );
-            enemy2Counter = 0;
-        }
-
-        //Flash enemy
-        std::for_each(
-            enemies.begin(),
-            enemies.end(),
-            std::mem_fun_ref(&Enemy::flash)
-            //[](Enemy& enemy) {enemy.flash();}
+    while ( start ) {
+        player = Player(
+            sf::IntRect(0, 99, 102, 126),
+            sf::Vector2f(0.5f, 0.5f),
+            sf::Vector2f(96.f, 336.f),
+            3
             );
+        score = 0;
+        enemy1Counter = 0;
+        enemy2Counter = 0;
+        shootCounter = 0;
+        srand( (unsigned)time(NULL) );
+        enemies.clear();
+        Enemy::clearBullet();
+        musicBGM.play();
 
-        //Todo: enemy shoot and flash enemy'sAmmo
-        std::for_each(
-            enemies.begin(),
-            enemies.end(),
-            [&player](Enemy& enemy){
-                enemy.shoot(player.getCenter());
+        //Main loop
+        while (windowMain.isOpen()) {
+
+            sf::Event event;
+            while (windowMain.pollEvent(event)) {
+                //Close window when exit
+                if (event.type == sf::Event::Closed) {
+                    windowMain.close();
+                    start = false;
+                }
+                /*Cheat code (can use only if life<3)
+                if ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Comma ) {
+                    player.addLife();
+                }
+                */
             }
-            );
-        Enemy::flashAmmo();
+
+            windowMain.clear();
+
+            //drawBackground
+            windowMain.draw(spriteBackground);
+
+            //Create enemy1
+            if( enemy1Counter == 120 ) {
+                enemies.push_back(
+                    Enemy(
+                        enemy1,
+                        sf::Vector2f(0.5f, 0.5f),
+                        sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
+                        )
+                    );
+                enemy1Counter = 0;
+            }
+
+            //Create enemy2
+            if ( enemy2Counter == 600 ) {
+                enemies.push_back(
+                    Enemy(
+                        enemy2,
+                        sf::Vector2f(0.5f, 0.5f),
+                        sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
+                        )
+                    );
+                enemy2Counter = 0;
+            }
+
+            //Flash enemy
+            std::for_each(
+                enemies.begin(),
+                enemies.end(),
+                std::mem_fun_ref(&Enemy::flash)
+                //[](Enemy& enemy) {enemy.flash();}
+                );
+
+            //Enemy shoot and flash enemy'sAmmo
+            std::for_each(
+                enemies.begin(),
+                enemies.end(),
+                [&player](Enemy& enemy){
+                    enemy.shoot(player.getCenter());
+                }
+                );
+            Enemy::flashAmmo();
 
 
-        //Move player
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(windowMain);
-        player.setPosition(sf::Vector2f(mousePosition.x - 24, mousePosition.y - 32));
+            //Move player
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(windowMain);
+            player.setPosition(sf::Vector2f(mousePosition.x - 24, mousePosition.y - 32));
 
-        //Player shoot
-        if ( shootCounter >= 40 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
-            player.shoot();
-            shootCounter = 0;
-        }
+            //Player shoot
+            if ( shootCounter >= 30 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
+                player.shoot();
+                shootCounter = 0;
+            }
 
-        //Flash all player bullet and player itself
-        player.flash();
+            //Flash all player bullet and player itself
+            player.flash();
 
-        //Mark all hited planes
-        std::for_each(
-            enemies.begin(),
-            enemies.end(),
-            [&](Enemy& enemy)
-            {
-                if ( player.hitEnemy( enemy ) ) {
-                    enemy.getHit();
-                    if ( enemy.isDead() ) {
-                        score+=deadScore [ enemy.getEnemyNo() ];
+            //Mark all hited planes
+            std::for_each(
+                enemies.begin(),
+                enemies.end(),
+                [&](Enemy& enemy)
+                {
+                    if ( player.hitEnemy( enemy ) ) {
+                        enemy.getHit();
+                        if ( enemy.isDead() ) {
+                            score+=deadScore [ enemy.getEnemyNo() ];
+                        }
                     }
                 }
-            }
-            );
+                );
 
-        //Destory all marked planes
-        enemies.remove_if(
-            [](Enemy& enemy) {return enemy.isDisappear();}
-            );
+            //Destory all marked planes
+            enemies.remove_if(
+                [](Enemy& enemy) {return enemy.isDisappear();}
+                );
 
-        //TEMPLY:Weather player get hit
-        if( Enemy::hitPlayer( player ) ) {
-            player.getHit();
-            if( player.isDead() ) {
-                std::cout<<"dead!"<<std::endl;
+            //TEMPLY:Weather player get hit
+            if( Enemy::hitPlayer( player ) ) {
+                player.getHit();
+                if( player.isDead() ) {
+                //
+                }
             }
+
+            //Draw all enemy
+            std::for_each(
+                enemies.begin(),
+                enemies.end(),
+                [&](Enemy& enemy) {
+                    windowMain.draw(enemy);
+                }
+                );
+
+            //Draw all enemy bullet
+            Enemy::drawAllBullet( windowMain );
+
+            //Draw all player bullet and player itself
+            player.draw(windowMain);
+
+            //Draw score
+            char scoreStr[40];
+            sprintf( scoreStr, "Score : %I64u", score );
+            scoreText.setString( scoreStr );
+            windowMain.draw( scoreText );
+            //Draw life
+            wchar_t lifeStr[10];
+            int i;
+            for (i = 0; i < player.getLife(); i++) lifeStr[i] = L'♥';
+            lifeStr[i] = '\0';
+            lifeText.setString( lifeStr );
+            lifeText.setPosition(
+                sf::Vector2f(
+                    240 - lifeText.getGlobalBounds().width - 5,//校正
+                    0 - 10//校正
+                    )
+                );
+            windowMain.draw( lifeText );
+
+            windowMain.display();
+
+            if( player.isDisappear() ) break;
+
+            enemy1Counter++;
+            enemy2Counter++;
+            shootCounter++;
         }
 
-        //Draw all enemy
-        std::for_each(
-            enemies.begin(),
-            enemies.end(),
-            [&](Enemy& enemy) {
-                windowMain.draw(enemy);
-            }
+        //Dead:
+        musicBGM.stop();
+
+        sf::Text loseMessage;
+        loseMessage.setFont( promptFont );
+        loseMessage.setCharacterSize( 42 );
+        loseMessage.setColor( sf::Color::Red );
+        loseMessage.setString("GAME OVER");
+        loseMessage.setPosition(
+            sf::Vector2f(
+                120 - loseMessage.getGlobalBounds().width / 2,
+                200 - loseMessage.getGlobalBounds().height / 2
+                )
             );
 
-        //Draw all enemy bullet
-        Enemy::drawAllBullet( windowMain );
+        sf::Text pressToReplayMessage;
+        pressToReplayMessage.setFont( promptFont );
+        pressToReplayMessage.setCharacterSize( 16 );
+        pressToReplayMessage.setColor( sf::Color::Red );
+        pressToReplayMessage.setString( "Press anykey to replay" );
+        pressToReplayMessage.setPosition(
+            loseMessage.getGlobalBounds().left + loseMessage.getGlobalBounds().width / 2 - pressToReplayMessage.getGlobalBounds().width / 2,
+            loseMessage.getGlobalBounds().top + loseMessage.getGlobalBounds().height
+            );
 
-        //Draw all player bullet and player itself
-        player.draw(windowMain);
-
-        //Draw score
-        char scoreStr[40];
-        sprintf( scoreStr, "Score : %I64u", score );
-        scoreText.setString( scoreStr );
-        windowMain.draw( scoreText );
-
+         //Show lose message
+        windowMain.draw(loseMessage);
+        windowMain.draw(pressToReplayMessage);
         windowMain.display();
-        enemy1Counter++;
-        enemy2Counter++;
-        shootCounter++;
+
+        bool shouldGoOut = false;
+        while ( windowMain.isOpen() && !shouldGoOut ) {
+
+            sf::Event event;
+            while (windowMain.pollEvent(event)) {
+                //Close window when exit
+                if (event.type == sf::Event::Closed) {
+                    windowMain.close();
+                    start = false;
+                }
+
+                if ( event.type == sf::Event::KeyPressed/* && event.key.code == sf::Keyboard::Comma */) {
+                    start = true;
+                    shouldGoOut = true;
+                }
+            }
+        }
     }
 
     return 0;
