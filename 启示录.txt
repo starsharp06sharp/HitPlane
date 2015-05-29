@@ -18,6 +18,10 @@ void flash() {刷新所有子弹并销毁越界子弹}
 bool 是否有子弹击中（敌机类）；
 //本函数需要在主循环判定击中时用循环枚举所有敌机类
 
+*void getHit()；
+*bool isDead()；
+*bool isDisappear()；
+
 }
 
 
@@ -36,7 +40,7 @@ void move () {移动 速度 个并且判定边界，若超左右界反弹，超上下界消失}
 
 static void flash() {刷新所有子弹并销毁越界子弹}
 
-bool 是否有子弹击中 （玩家类）；
+bool 是否有子弹击中 （玩家类）；//bool hitPlayer (Player player)；
 
 
 }

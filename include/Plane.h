@@ -20,6 +20,9 @@ protected:
 
     int life;
 
+    bool disappear;
+
+
 private:
 
 };

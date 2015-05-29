@@ -3,6 +3,63 @@
 
 #define PI 3.1415926
 
+
+const int maxLife[] ={ 1, 2, 4 };
+
+const sf::Vector2f initSpeed[] =
+{
+    sf::Vector2f( 0, 0.3 ),
+    sf::Vector2f( 0.4 , 0.4 )
+};
+
+const int shootInterval[] = {100, 80, 50};
+
+const sf::IntRect livePlaneToDisplay[][7] =
+/*
+*This array storge the position rectangle in texture
+* of each plane in different life.
+*E.g. livePlaneToDisplay [enemyNo] [lifeRemain]
+*/
+{
+    {//enemy1
+        sf::IntRect(),
+        sf::IntRect( 534, 612, 57, 43 )//life = 1
+    },
+
+    {//enemy2
+        sf::IntRect(),
+        sf::IntRect( 432, 525, 69, 99 ),//life = 1
+        sf::IntRect( 0, 0, 69, 99 )//life = 2
+    }
+};
+
+const sf::IntRect deadPlaneToDisplay[][7] =
+/*
+*This array storge the position rectangle in texture
+* of each dead plane at different time.
+*E.g. deadPlaneToDisplay [enemyNo] [deadCounter]
+*/
+{
+    {//enemy1
+        sf::IntRect(),
+        sf::IntRect( 267, 347, 57, 51 ),//deadCounter = 1
+        sf::IntRect( 873, 697, 57, 51 ),//deadCounter = 2
+        sf::IntRect( 267, 296, 57, 51 ),//deadCounter = 3
+        sf::IntRect( 930, 697, 57, 51)//deadCounter = 4
+    },
+
+    {//enemy2
+        sf::IntRect(),
+        sf::IntRect( 534, 655, 69, 95 ),//deadCounter = 1
+        sf::IntRect( 603, 655, 69, 95 ),//deadCounter = 2
+        sf::IntRect( 672, 653, 69, 95 ),//deadCounter = 3
+        sf::IntRect( 741, 653, 69, 95)//deadCounter = 4
+    }
+};
+
+const int deadDelaySpeed[] = { 6, 10 };
+
+
 sf::SoundBuffer Enemy::bufferExplode[3];
 sf::Sound Enemy::soundExplode[3];
 
@@ -21,11 +78,10 @@ Enemy::Enemy(
             ),
         enemyNo( enemyNo ),
         speed(
-            sf::Vector2f(0, 0.3)
+            initSpeed[ enemyNo ]
             ),
         deadCounter( 0 ),
-        shootCounter( 0 ),
-        disappear( false )
+        shootCounter( 0 )
 {
     //Do nothing
 }
@@ -34,16 +90,21 @@ void
 Enemy::flash( void )
 {
     if ( deadCounter <= 0 ) {
-        this-> move(speed);
-        if ( this-> judgeOutOfBorder() >= 6 ) this-> disappear = true;
+
+        this-> move();
+
     } else {
+
         if (deadDelayConuter == deadDelaySpeed[enemyNo]) {
+
+            if( deadCounter++ > 4 ) this-> disappear = true;
             this-> setTextureRect(
                 deadPlaneToDisplay [enemyNo] [deadCounter]
                 );
-            if( deadCounter++ > 4 ) this-> disappear = true;
-        deadDelayConuter=0;
-        } else deadDelayConuter++;
+            deadDelayConuter=0;
+
+        } else
+            deadDelayConuter++;
     }
 }
 
@@ -101,7 +162,7 @@ Enemy::isDead( void )
 }
 
 void
-Enemy::shoot( Player& player )
+Enemy::shoot( sf::Vector2f targetPosition )
 {
     shootCounter++;
     if ( shootCounter < shootInterval[enemyNo] ) return;
@@ -122,8 +183,8 @@ Enemy::shoot( Player& player )
         bulletSpeed = sf::Vector2f(0, 2);
     } else if ( enemyNo == enemy2 ) {
         float deltaX, deltaY;
-        deltaX = myPosition.x - player.getCenter().x;
-        deltaY = myPosition.y - player.getCenter().y;
+        deltaX = myPosition.x -targetPosition.x;
+        deltaY = myPosition.y - targetPosition.y;
         theta = atan( deltaX / deltaY );
         if ( deltaY>0 ) theta += PI;
         bulletSpeed = sf::Vector2f( 2*sin(theta), 2*cos(theta) );
@@ -164,4 +225,40 @@ Enemy::flashAmmo( void )
     ammo.remove_if(
         []( Bullet& bullet ) {return bullet.isDisappear();}
         );
+}
+
+void
+Enemy::move( void )
+{
+    sf::Sprite::move( speed );
+
+    int status = this->judgeOutOfBorder();
+
+    if( status % 3 > 0 )//Out left or right border
+    {
+        this->speed =
+        sf::Vector2f(
+            -speed.x,
+            speed.y
+            );
+    }
+
+    if( status / 3 > 0 )//Out top or bottom border
+        this-> disappear = true;
+}
+
+bool
+Enemy::hitPlayer(Player& player)
+{
+    sf::FloatRect playerRect = player.getGlobalBounds();
+    std::list<Bullet>::iterator it = ammo.begin();
+
+    for ( ;it != ammo.end(); ++it ) {
+        if( it-> hit( playerRect ) ){
+            ammo.erase( it );
+            return true;
+        }
+    }
+
+    return false;
 }

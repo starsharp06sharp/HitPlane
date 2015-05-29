@@ -23,10 +23,22 @@ public:
     sf::Vector2f
     getCenter( void );
 
+    static void
+    initSound( void );
+
     void
     setPosition(
         sf::Vector2f position
         );
+
+    void
+    getHit( void );
+
+    bool
+    isDead( void );
+
+    bool
+    isDisappear( void );
 
     void
     shoot( void );
@@ -49,6 +61,23 @@ protected:
 private:
 
     std::list<Bullet> ammo;
+
+    int deadCounter;
+    /*
+    *This counter repesents the different stage of dead plane:
+    *When it is 0, the plane is alive
+    *When it is a num>0 ,it means the picture NO that is putting on the screen now.
+    */
+
+    int deadDelayConuter;
+    /*
+    *This counter can control the speed of explode action.
+    *Every to number play one frame.
+    */
+
+    static sf::SoundBuffer bufferExplode;
+
+    static sf::Sound soundExplode;
 
 };
 

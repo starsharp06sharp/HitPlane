@@ -59,7 +59,7 @@ int main( void ) {
     scoreText.setColor( sf::Color::Blue );
 
     //Inital moveable object's texture
-    Moveable::initTexturePlanes();
+    Moveable::initTexture();
     //Init player
     Player player(
         sf::IntRect(0, 99, 102, 126),
@@ -128,7 +128,7 @@ int main( void ) {
             enemies.begin(),
             enemies.end(),
             [&player](Enemy& enemy){
-                enemy.shoot(player);
+                enemy.shoot(player.getCenter());
             }
             );
         Enemy::flashAmmo();
@@ -139,7 +139,7 @@ int main( void ) {
         player.setPosition(sf::Vector2f(mousePosition.x - 24, mousePosition.y - 32));
 
         //Player shoot
-        if ( shootCounter >= 20 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
+        if ( shootCounter >= 40 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
             player.shoot();
             shootCounter = 0;
         }
@@ -147,7 +147,7 @@ int main( void ) {
         //Flash all player bullet and player itself
         player.flash();
 
-        //TEMPLY:Mark all hited planes
+        //Mark all hited planes
         std::for_each(
             enemies.begin(),
             enemies.end(),
@@ -162,10 +162,18 @@ int main( void ) {
             }
             );
 
-        //TEMPLY:Destory all marked planes
+        //Destory all marked planes
         enemies.remove_if(
             [](Enemy& enemy) {return enemy.isDisappear();}
             );
+
+        //TEMPLY:Weather player get hit
+        if( Enemy::hitPlayer( player ) ) {
+            player.getHit();
+            if( player.isDead() ) {
+                std::cout<<"dead!"<<std::endl;
+            }
+        }
 
         //Draw all enemy
         std::for_each(

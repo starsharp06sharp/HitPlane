@@ -1,5 +1,35 @@
 #include "Player.h"
 
+const sf::IntRect livePlaneToDisplay[] =
+/*
+*This array storge the position rectangle in texture
+* of player in different life.
+*E.g. livePlaneToDisplay [lifeRemain]
+*/
+{
+    sf::IntRect(),
+    sf::IntRect( 165, 360, 102, 126 ),//life = 1
+    sf::IntRect( 165, 360, 102, 126 ),//life = 2,the same
+    sf::IntRect( 0, 99, 102, 126 )//life = 3
+};
+
+const sf::IntRect deadPlaneToDisplay[] =
+/*
+*This array storge the position rectangle in texture
+* of dead player at different time.
+*E.g. deadPlaneToDisplay [deadCounter]
+*/
+{
+    sf::IntRect(),
+    sf::IntRect( 165, 234, 102, 126 ),//deadCounter = 1
+    sf::IntRect( 330, 624, 102, 126 ),//deadCounter = 2
+    sf::IntRect( 330, 498, 102, 126 ),//deadCounter = 3
+    sf::IntRect( 432, 624, 102, 126 )//deadCounter = 4
+};
+
+sf::SoundBuffer Player::bufferExplode;
+sf::Sound Player::soundExplode;
+
 Player::Player(
     sf::IntRect aeraToDisplay,
     sf::Vector2f scale,
@@ -17,14 +47,26 @@ Player::Player(
 }
 
 void
+Player::initSound( void )
+{
+    if( !bufferExplode.loadFromFile("game_over.ogg") ) {
+        //Exit when sound file is broken
+        system("pause");
+        exit(-1);
+    }
+    soundExplode.setBuffer(bufferExplode);
+    soundExplode.setVolume(100);
+}
+
+void
 Player::shoot( void )
 {
     ammo.push_back(
         Bullet(
-            sf::IntRect(69, 78, 9, 21),
-            sf::Vector2f(0.5f, 0.5f),
-            this-> getPosition() + sf::Vector2f(24.f, -10.f),
-            sf::Vector2f(0, -5)
+            sf::IntRect( 69, 78, 9, 21 ),
+            sf::Vector2f( 0.5f, 0.5f ),
+            this-> getPosition() + sf::Vector2f( 24.f, -10.f ),
+            sf::Vector2f( 0, -4 )
             )
         );
 }
@@ -47,7 +89,7 @@ Player::draw(
     sf::RenderWindow& window
     )
 {
-    window.draw(*this);
+    window.draw( *this );
     std::for_each(
         ammo.begin(),
         ammo.end(),
@@ -65,12 +107,14 @@ Player::hitEnemy(
 {
     sf::FloatRect enemyRect = enemy.getGlobalBounds();
     std::list<Bullet>::iterator it = ammo.begin();
+
     for ( ;it != ammo.end(); ++it ) {
         if( it-> hit( enemyRect ) ){
             ammo.erase( it );
             return true;
         }
     }
+
     return false;
 }
 
@@ -79,18 +123,18 @@ Player::setPosition(
     sf::Vector2f position
     )
 {
-    sf::Sprite::setPosition(position);
+    sf::Sprite::setPosition( position );
     int status = judgeOutOfBorder();
 
-    if ( status%3 == 1) position.x = -1.f;
-    else if( status%3 ==2) position.x = 242.f - this-> getGlobalBounds().width;
+    if ( status%3 == 1 ) position.x = -1.f;//Out left border
+    else if( status%3 ==2 ) position.x = 242.f - this-> getGlobalBounds().width;//Out right border
 
-    status/=3;
+    status /= 3;
 
-    if ( status%3 == 1) position.y = -1.f;
-    else if( status%3 ==2) position.y = 406.f - this-> getGlobalBounds().height;
+    if ( status%3 == 1 ) position.y = -1.f;//Out top border
+    else if( status%3 ==2 ) position.y = 406.f - this-> getGlobalBounds().height;//Out bottom border
 
-    sf::Sprite::setPosition(position);
+    sf::Sprite::setPosition( position );
 }
 
 sf::Vector2f
@@ -101,4 +145,32 @@ Player::getCenter( void )
         myBound.left + myBound.width / 2,
         myBound.top + myBound.height / 2
         );
+}
+
+bool
+Player::isDead( void )
+{
+    return ( life <= 0 );
+}
+
+bool
+Player::isDisappear( void )
+{
+    return disappear;
+}
+
+void
+Player::getHit( void )
+{
+    life--;
+    std::cout<<life<<std::endl;
+    if ( life > 0 ) {
+        this-> setTextureRect(
+            livePlaneToDisplay[life]
+            );
+    } else if ( life == 0 ) {
+        deadCounter = 1;
+        soundExplode.play();
+        deadDelayConuter = 0;
+    }
 }

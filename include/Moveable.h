@@ -17,7 +17,7 @@ public:
         );
 
     static void
-    initTexturePlanes( void );
+    initTexture( void );
 
 protected:
 

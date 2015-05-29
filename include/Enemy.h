@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include <list>
+#include <cmath>
 #include "Player.h"
 #include "Plane.h"
 #include "Bullet.h"
@@ -12,56 +13,7 @@ enum enemyStyle {
     //,enemy3
 };
 
-const int maxLife[] ={ 1, 2, 4 };
-
-const int deadScore[] = { 1, 5, 100 };
-
-const int shootInterval[] = {100, 100, 50};
-
-const sf::IntRect livePlaneToDisplay[][7] =
-/*
-*This array storge the position rectangle in texture
-* of each plane in different life.
-*E.g. livePlaneToDisplay [enemyNo] [lifeRemain]
-*/
-{
-    {//enemy1
-        sf::IntRect(),
-        sf::IntRect( 534, 612, 57, 43 )//life = 1
-    },
-
-    {//enemy2
-        sf::IntRect(),
-        sf::IntRect( 432, 525, 69, 99 ),//life = 1
-        sf::IntRect( 0, 0, 69, 99 )//life = 2
-    }
-};
-
-const sf::IntRect deadPlaneToDisplay[][7] =
-/*
-*This array storge the position rectangle in texture
-* of each dead plane at different time.
-*E.g. deadPlaneToDisplay [enemyNo] [deadCounter]
-*/
-{
-    {//enemy1
-        sf::IntRect(),
-        sf::IntRect( 267, 347, 57, 51 ),//deadCounter = 1
-        sf::IntRect( 873, 697, 57, 51 ),//deadCounter = 2
-        sf::IntRect( 267, 296, 57, 51 ),//deadCounter = 3
-        sf::IntRect( 930, 697, 57, 51)//deadCounter = 4
-    },
-
-    {//enemy2
-        sf::IntRect(),
-        sf::IntRect( 534, 655, 69, 95 ),//deadCounter = 1
-        sf::IntRect( 603, 655, 69, 95 ),//deadCounter = 2
-        sf::IntRect( 672, 653, 69, 95 ),//deadCounter = 3
-        sf::IntRect( 741, 653, 69, 95)//deadCounter = 4
-    }
-};
-
-const int deadDelaySpeed[] = { 5, 8 };
+const int deadScore[] = { 1, 10, 100 };
 
 class Player;
 
@@ -81,6 +33,9 @@ public:
     getEnemyNo( void );
 
     void
+    move();
+
+    void
     flash( void );
 
     void
@@ -93,7 +48,10 @@ public:
     isDisappear( void );
 
     void
-    shoot( Player& player );
+    shoot( sf::Vector2f targetPosition );
+
+    static bool
+    hitPlayer( Player& player );
 
     static void
     flashAmmo( void );
@@ -106,8 +64,6 @@ protected:
 private:
 
     enemyStyle enemyNo;
-
-    bool disappear;
 
     static std::list<Bullet> ammo;
 
