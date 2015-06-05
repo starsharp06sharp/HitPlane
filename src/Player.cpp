@@ -86,11 +86,10 @@ Player::shoot( void )
 void
 Player::flash( void )
 {
-    std::for_each(
-        ammo.begin(),
-        ammo.end(),
-        std::mem_fun_ref(&Bullet::flash)
-        );
+    for ( auto &bullet : ammo ) {
+        bullet.flash();
+    }
+
     ammo.remove_if(
         []( Bullet& bullet ) {return bullet.isDisappear();}
         );
@@ -115,15 +114,10 @@ Player::draw(
     sf::RenderWindow& window
     )
 {
+    for( auto &bullet : ammo ){
+        window.draw( bullet );
+    }
     window.draw( *this );
-    std::for_each(
-        ammo.begin(),
-        ammo.end(),
-        //std::bind1st(std::mem_fun1_ref(&sf::RenderWindow::draw),window)
-        [&]( Bullet& bullet ) {window.draw(bullet);}
-        );
-//    std::list<Bullet>::iterator it = ammo.begin();
-//    for (; it != )
 }
 
 bool
@@ -134,8 +128,8 @@ Player::hitEnemy(
     sf::FloatRect enemyRect = enemy.getGlobalBounds();
     std::list<Bullet>::iterator it = ammo.begin();
 
-    for ( ;it != ammo.end(); ++it ) {
-        if( it-> hit( enemyRect ) ){
+    for ( ; it != ammo.end(); ++it ){
+        if( it->hit( enemyRect ) ){
             ammo.erase( it );
             return true;
         }

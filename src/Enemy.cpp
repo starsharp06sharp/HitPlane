@@ -207,25 +207,19 @@ Enemy::shoot( sf::Vector2f targetPosition )
 void
 Enemy::drawAllBullet( sf::RenderWindow& window )
 {
-    std::for_each(
-        ammo.begin(),
-        ammo.end(),
-        [&window](Bullet& bullet) {
-                  window.draw( bullet );
-            }
-        );
+    for( auto &bullet : ammo ) {
+        window.draw( bullet );
+    }
 }
 
 void
 Enemy::flashAmmo( void )
 {
-    std::for_each(
-        ammo.begin(),
-        ammo.end(),
-        [](Bullet& bullet) {bullet.flash();}
-        );
+    for( auto &bullet : ammo ){
+        bullet.flash();
+    }
     ammo.remove_if(
-        []( Bullet& bullet ) {return bullet.isDisappear();}
+        std::mem_fun_ref(&Bullet::isDisappear)
         );
 }
 
@@ -255,8 +249,8 @@ Enemy::hitPlayer(Player& player)
     sf::FloatRect playerRect = player.getGlobalBounds();
     std::list<Bullet>::iterator it = ammo.begin();
 
-    for ( ;it != ammo.end(); ++it ) {
-        if( it-> hit( playerRect ) ){
+    for ( ; it != ammo.end(); ++it ){
+        if( it->hit( playerRect ) ){
             ammo.erase( it );
             return true;
         }

@@ -45,3 +45,5 @@ bool 是否有子弹击中 （玩家类）；//bool hitPlayer (Player player)；
 
 }
 
+//玩家奖励子弹飞行速度x2，射击速度x3，持续10s(600帧)
+

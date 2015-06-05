@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>160</y>
+      <w>210</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>/Moveable/
+--
+static void
+    initTexture( void );</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>320</y>
+      <w>240</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>_Plane_
+--
+int
+    judgeOutOfBorder( void );</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>200</x>
+      <y>170</y>
+      <w>210</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>320</y>
+      <w>210</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>_Bullet_
+--
+static void
+    initSound( void );
+--
+void
+    flash( void );
+--
+bool
+    isDisappear( void );
+--
+bool
+    hit( FloatRect target );</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>90</x>
+      <y>210</y>
+      <w>30</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>430</y>
+      <w>240</w>
+      <h>430</h>
+    </coordinates>
+    <panel_attributes>_Player_
+--
+static void
+    initSound( void );
+--
+void
+  setPosition( Vector2f position );
+--
+void
+    flash( void );
+--
+void
+    getHit( void );
+--
+bool
+    isDead( void );
+--
+bool
+    isDisappear( void );
+--
+void
+    shoot( void );
+--
+bool
+    hitEnemy( Enemy&amp; enemy);
+--
+void
+    draw( RenderWindow&amp; window );
+--
+int
+    getLife( void );
+--
+void
+    addLife( void );</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>430</y>
+      <w>300</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>_Enemy_
+--
+static void
+    initSound( void );
+--
+static void
+    clearBullet( void );
+--
+ enemyStyle
+    getEnemyNo( void );
+--
+void
+    move();
+--
+void
+    flash( void );
+--
+void
+    getHit( void );
+--
+bool
+    isDead( void );
+--
+bool
+    isDisappear( void );
+--
+void
+    shoot( sf::Vector2f targetPosition );
+--
+static bool
+    hitPlayer( Player&amp; player );
+--
+ static void
+    flashAmmo( void );
+--
+static void
+    drawAllBullet( sf::RenderWindow&amp; window );
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>370</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>330</y>
+      <w>230</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;210.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>210</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>_sf::Sprite_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>90</x>
+      <y>10</y>
+      <w>30</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+</diagram>
