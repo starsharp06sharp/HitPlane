@@ -1,5 +1,7 @@
+$cat .gitignore 
+
 *.exe
 *.o
 *.layout
 *.dll
-\bin\Release\*
+/bin/*
