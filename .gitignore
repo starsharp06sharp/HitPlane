@@ -2,4 +2,4 @@
 *.o
 *.layout
 *.dll
-/bin/Release/*
+\bin\Release\*
