@@ -4,10 +4,10 @@
 int main( void ) {
     Sky sky;
 
-    if (sky.showStartInterface()) {
+    if ( sky.showStartInterface() ) {
         do {
             sky.mainLoop();
-        }while(sky.showGameOverInterface());
+        }while( sky.showGameOverInterface() );
     }
 
     return 0;
