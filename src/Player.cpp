@@ -205,5 +205,6 @@ Player::getLife( void )
 void
 Player::addLife( void )
 {
-    life++;
+    if( life < 3 )
+        life++;
 }

@@ -79,14 +79,11 @@ Sky::mainLoop( void )
             );
 
     unsigned long long score = 0;
-    unsigned enemy1Counter = 0;
-    unsigned enemy2Counter = 0;
     unsigned shootCounter = 0;
-    std::list<Enemy> enemies;
+    Enemies enemies;
 
 
     srand( (unsigned)time(NULL) );
-    Enemy::clearBullet();
     this->setMouseCursorVisible( false );
     musicBGM.play();
 
@@ -99,54 +96,23 @@ Sky::mainLoop( void )
             if (event.type == sf::Event::Closed) {
                 this->close();
             }
-            /*Cheat code (can use only if life<3)
-            if ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Comma ) {
+
+            if ( event.type == sf::Event::KeyPressed &&
+                 event.key.code == sf::Keyboard::Comma ) {
                 player.addLife();
             }
-            */
+
+            if( event.type == sf::Event::KeyPressed &&
+                event.key.code == sf::Keyboard::P ) {
+                    this->pause();
+                }
         }
 
-        this->clear();
+       //Add enemy if it is the right time
+        enemies.addEnemy();
 
-        //drawBackground
-        this->draw(spriteBackground);
-
-        //Create enemy1
-        if( enemy1Counter == 120 ) {
-            enemies.push_back(
-                Enemy(
-                    enemy1,
-                    sf::Vector2f(0.5f, 0.5f),
-                    sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
-                    )
-                );
-            enemy1Counter = 0;
-        }
-
-        //Create enemy2
-        if ( enemy2Counter == 600 ) {
-            enemies.push_back(
-                Enemy(
-                    enemy2,
-                    sf::Vector2f(0.5f, 0.5f),
-                    sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
-                    )
-                );
-            enemy2Counter = 0;
-        }
-
-        //Flash enemy
-        for( auto &enemy : enemies ){
-            enemy.flash();
-        }
-
-        //Enemy shoot
-        for( auto &enemy : enemies ){
-            enemy.shoot(player.getCenter());
-        }
-        //Flash enemy'sAmmo
-        Enemy::flashAmmo();
-
+        //flash all enemies and theirs bullets
+        enemies.flashAll( player );
 
         //Move player
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*this);
@@ -161,30 +127,21 @@ Sky::mainLoop( void )
         //Flash all player bullet and player itself
         player.flash();
 
-        //Mark all hited planes
-            for( auto &enemy : enemies ){
-                if ( player.hitEnemy( enemy ) ) {
-                    enemy.getHit();
-                    if ( enemy.isDead() ) {
-                        score+=deadScore [ enemy.getEnemyNo() ];
-                    }
-                }
-            }
+        //Judge if enemies hitted by player's bullet
+        score += enemies.judge( player );
 
-        //Destory all marked planes
-        enemies.remove_if(
-            std::mem_fun_ref(&Enemy::isDisappear)
-            );
-
-        //TEMPLY:Weather player get hit
-        if( Enemy::hitPlayer( player ) ) {
+        //Weather player get hit
+        if( enemies.hit( player ) ) {
             player.getHit();
         }
 
+        this->clear();
+
+        //drawBackground
+        this->draw(spriteBackground);
+
         //Draw all enemy
-        for( auto &enemy : enemies ){
-            this->draw( enemy );
-        }
+        enemies.draw( *this );
 
         //Draw all enemy bullet
         Enemy::drawAllBullet( *this );
@@ -202,11 +159,8 @@ Sky::mainLoop( void )
 
         if( player.isDisappear() ) break;
 
-        enemy1Counter++;
-        enemy2Counter++;
         shootCounter++;
     }
-
     //Dead:
     musicBGM.stop();
     this->setMouseCursorVisible( true );
@@ -308,4 +262,44 @@ Sky::showGameOverInterface( void )
         }
     }
     return false;
+}
+
+void
+Sky::pause( void )
+{
+    musicBGM.pause();
+    this->setMouseCursorVisible( true );
+
+    sf::Text pausedMessage;
+    pausedMessage.setFont( promptFont );
+    pausedMessage.setCharacterSize( 20 );
+    pausedMessage.setColor( sf::Color::Red );
+    pausedMessage.setString( "Press 'P' to resume" );
+    pausedMessage.setPosition(
+        120 - pausedMessage.getGlobalBounds().width / 2,
+        200 - pausedMessage.getGlobalBounds().height / 2
+        );
+    this->draw( pausedMessage );
+    this->display();
+
+    while( this->isOpen() ) {
+        sf::Event event;
+        while( this->pollEvent( event ) ){
+            //Close window when exit
+            if (event.type == sf::Event::Closed) {
+                this->close();
+                return;
+            }
+            //Return when pause are pressed
+            if( event.type == sf::Event::KeyPressed &&
+                event.key.code == sf::Keyboard::P ) {
+                    //Recover before return
+                    this->setMouseCursorVisible( false );
+                    musicBGM.play();
+
+                    return;
+            }
+        }
+        //Draw nothing
+    }
 }
