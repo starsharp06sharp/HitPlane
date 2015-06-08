@@ -5,7 +5,7 @@ getScore(sf::Font& font, unsigned long long score)
 {
     static sf::Text scoreText;
     scoreText.setFont( font );
-    scoreText.setCharacterSize( 18 );
+    scoreText.setCharacterSize( 36 * SCALE );
     scoreText.setColor( sf::Color::Blue );
 
     char scoreStr[40];
@@ -20,7 +20,7 @@ getLife(sf::Font& font, int life)
 {
     static sf::Text lifeText;
     lifeText.setFont( font );
-    lifeText.setCharacterSize( 30 );
+    lifeText.setCharacterSize( 60 *SCALE );
     lifeText.setColor( sf::Color::Red );
 
     //Draw life
@@ -31,7 +31,7 @@ getLife(sf::Font& font, int life)
     lifeText.setString( lifeStr );
     lifeText.setPosition(
         sf::Vector2f(
-            240 - lifeText.getGlobalBounds().width - 5,//校正
+            WINDOW_SIZE_X - lifeText.getGlobalBounds().width - 5,//校正
             0 - 10//校正
             )
         );

@@ -4,6 +4,7 @@
 #include <list>
 #include <functional>
 #include <SFML/Graphics.hpp>
+#include "constDef.h"
 #include "Plane.h"
 #include "Bullet.h"
 #include "Enemy.h"

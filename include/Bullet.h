@@ -2,6 +2,7 @@
 #define BULLET_H
 
 #include <SFML/Audio.hpp>
+#include "constDef.h"
 #include "Moveable.h"
 
 class Bullet : public Moveable {

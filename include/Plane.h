@@ -1,6 +1,7 @@
 #ifndef PLANE_H
 #define PLANE_H
 
+#include "constDef.h"
 #include "Moveable.h"
 
 class Plane : public Moveable {

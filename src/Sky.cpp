@@ -4,8 +4,9 @@
 
 Sky::Sky() :
     sf::RenderWindow(
-        sf::VideoMode(240, 400),
-        "HitPlane By L.Zheng"
+        sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y),
+        "HitPlane By L.Zheng",
+        sf::Style::Close
         )
 {
     this->setFramerateLimit( 60 );
@@ -25,14 +26,14 @@ Sky::initBackground( void )
     }
 
     this->spriteBackground.setTexture(textureBackground);
-    this->spriteBackground.setScale(sf::Vector2f(0.5f, 0.5f));
+    this->spriteBackground.setScale(sf::Vector2f(SCALE, SCALE));
 }
 
 void
 Sky::initMusic( void )
 {
     //Create BGM
-    if (!this->musicBGM.openFromFile(/*"WJJ.WAV"*/"TURKY.WAV")) {
+    if (!this->musicBGM.openFromFile("TURKY.WAV")) {
         //Exit when music file is broken
         //system("pause");
         exit (-1);
@@ -73,8 +74,8 @@ Sky::mainLoop( void )
     //Init player
     Player player = Player(
             sf::IntRect(0, 99, 102, 126),
-            sf::Vector2f(0.5f, 0.5f),
-            sf::Vector2f(96.f, 336.f),
+            sf::Vector2f(SCALE, SCALE),
+            sf::Vector2f(0, 0),
             3
             );
 
@@ -94,6 +95,11 @@ Sky::mainLoop( void )
         while (this->pollEvent(event)) {
             //Close window when exit
             if (event.type == sf::Event::Closed) {
+                this->close();
+            }
+            //Close window when esc is pressed
+            if ( event.type == sf::Event::KeyPressed &&
+                 event.key.code == sf::Keyboard::Escape ) {
                 this->close();
             }
 
@@ -116,7 +122,7 @@ Sky::mainLoop( void )
 
         //Move player
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*this);
-        player.setPosition(sf::Vector2f(mousePosition.x - 24, mousePosition.y - 32));
+        player.setPosition(sf::Vector2f(mousePosition.x - 48 * SCALE, mousePosition.y - 64 * SCALE));
 
         //Player shoot
         if ( shootCounter >= 30 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
@@ -171,19 +177,19 @@ Sky::showStartInterface( void )
 {
     sf::Text title;
     title.setFont( yaheiFont );
-    title.setCharacterSize( 42 );
+    title.setCharacterSize( 84 *SCALE );
     title.setColor( sf::Color::Red );
     title.setString(L"打 灰 机");
     title.setPosition(
             sf::Vector2f(
-                120 - title.getGlobalBounds().width / 2,
-                200 - title.getGlobalBounds().height / 2
+                240 * SCALE - title.getGlobalBounds().width / 2,
+                400 * SCALE - title.getGlobalBounds().height / 2
                 )
             );
 
     sf::Text clickStartMessage;
     clickStartMessage.setFont( promptFont );
-    clickStartMessage.setCharacterSize( 16 );
+    clickStartMessage.setCharacterSize( 32 * SCALE );
     clickStartMessage.setColor( sf::Color::Red );
     clickStartMessage.setString( "Click to start" );
     clickStartMessage.setPosition(
@@ -220,19 +226,19 @@ Sky::showGameOverInterface( void )
 {
     sf::Text loseMessage;
     loseMessage.setFont( promptFont );
-    loseMessage.setCharacterSize( 42 );
+    loseMessage.setCharacterSize( 84 * SCALE );
     loseMessage.setColor( sf::Color::Red );
     loseMessage.setString("GAME OVER");
     loseMessage.setPosition(
         sf::Vector2f(
-            120 - loseMessage.getGlobalBounds().width / 2,
-            200 - loseMessage.getGlobalBounds().height / 2
+            240 * SCALE - loseMessage.getGlobalBounds().width / 2,
+            400 * SCALE - loseMessage.getGlobalBounds().height / 2
             )
         );
 
     sf::Text clickToRestartMessage;
     clickToRestartMessage.setFont( promptFont );
-    clickToRestartMessage.setCharacterSize( 16 );
+    clickToRestartMessage.setCharacterSize( 32 *SCALE );
     clickToRestartMessage.setColor( sf::Color::Red );
     clickToRestartMessage.setString( "Click to restart" );
     clickToRestartMessage.setPosition(
@@ -272,12 +278,12 @@ Sky::pause( void )
 
     sf::Text pausedMessage;
     pausedMessage.setFont( promptFont );
-    pausedMessage.setCharacterSize( 20 );
+    pausedMessage.setCharacterSize( 40 *SCALE );
     pausedMessage.setColor( sf::Color::Red );
     pausedMessage.setString( "Press 'P' to resume" );
     pausedMessage.setPosition(
-        120 - pausedMessage.getGlobalBounds().width / 2,
-        200 - pausedMessage.getGlobalBounds().height / 2
+        240 * SCALE - pausedMessage.getGlobalBounds().width / 2,
+        400 * SCALE - pausedMessage.getGlobalBounds().height / 2
         );
     this->draw( pausedMessage );
     this->display();

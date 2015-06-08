@@ -15,8 +15,8 @@ Enemies::addEnemy( void )
         enemies.push_back(
             Enemy(
                 enemy1,
-                sf::Vector2f(0.5f, 0.5f),
-                sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
+                sf::Vector2f(SCALE, SCALE),
+                sf::Vector2f( rand()% (int)(WINDOW_SIZE_X - 57 * SCALE), 0)
                 )
             );
         enemy1Counter = 0;
@@ -28,8 +28,8 @@ Enemies::addEnemy( void )
         enemies.push_back(
             Enemy(
                 enemy2,
-                sf::Vector2f(0.5f, 0.5f),
-                sf::Vector2f( rand()% (int)(240 - 57*0.5), 0)
+                sf::Vector2f(SCALE, SCALE),
+                sf::Vector2f( rand()% (int)(WINDOW_SIZE_X - 69 * SCALE), 0)
                 )
             );
         enemy2Counter = 0;

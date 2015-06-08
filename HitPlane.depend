@@ -491,31 +491,34 @@
 	<stdlib.h>
 	<iostream>
 
-1433575418 source:d:\runtimeerror\hitplane\src\bullet.cpp
+1433777863 source:d:\runtimeerror\hitplane\src\bullet.cpp
 	"Bullet.h"
 
-1433575416 d:\runtimeerror\hitplane\include\bullet.h
+1433778479 d:\runtimeerror\hitplane\include\bullet.h
 	<SFML/Audio.hpp>
+	"constDef.h"
 	"Moveable.h"
 
-1433575419 source:d:\runtimeerror\hitplane\src\plane.cpp
+1433779813 source:d:\runtimeerror\hitplane\src\plane.cpp
 	"Plane.h"
 
-1433575416 d:\runtimeerror\hitplane\include\plane.h
+1433778492 d:\runtimeerror\hitplane\include\plane.h
+	"constDef.h"
 	"Moveable.h"
 
-1433770285 source:d:\runtimeerror\hitplane\src\player.cpp
+1433780723 source:d:\runtimeerror\hitplane\src\player.cpp
 	"Player.h"
 
-1433575416 d:\runtimeerror\hitplane\include\player.h
+1433778461 d:\runtimeerror\hitplane\include\player.h
 	<list>
 	<functional>
 	<SFML/Graphics.hpp>
+	"constDef.h"
 	"Plane.h"
 	"Bullet.h"
 	"Enemy.h"
 
-1433575419 source:d:\runtimeerror\hitplane\src\enemy.cpp
+1433781022 source:d:\runtimeerror\hitplane\src\enemy.cpp
 	<cmath>
 	"Enemy.h"
 
@@ -526,7 +529,7 @@
 	"Plane.h"
 	"Bullet.h"
 
-1433774829 source:d:\runtimeerror\hitplane\src\sky.cpp
+1433780052 source:d:\runtimeerror\hitplane\src\sky.cpp
 	"Sky.h"
 	"gameFunc.h"
 
@@ -542,7 +545,7 @@
 	"Enemy.h"
 	"Enemies.h"
 
-1433575416 source:d:\runtimeerror\hitplane\gamefunc.cpp
+1433779878 source:d:\runtimeerror\hitplane\gamefunc.cpp
 	"gameFunc.h"
 
 1433575416 d:\runtimeerror\hitplane\include\gamefunc.h
@@ -566,6 +569,8 @@
 	"Player.h"
 	"Enemy.h"
 
-1433774856 source:d:\runtimeerror\hitplane\src\enemies.cpp
+1433778659 source:d:\runtimeerror\hitplane\src\enemies.cpp
 	"Enemies.h"
+
+1433780348 d:\runtimeerror\hitplane\include\constdef.h
 

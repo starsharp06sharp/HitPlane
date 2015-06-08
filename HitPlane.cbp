@@ -57,6 +57,7 @@
 		<Unit filename="include/Plane.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Sky.h" />
+		<Unit filename="include/constDef.h" />
 		<Unit filename="include/gameFunc.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Bullet.cpp" />

@@ -8,8 +8,8 @@ const int maxLife[] ={ 1, 2, 4 };
 
 const sf::Vector2f initSpeed[] =
 {
-    sf::Vector2f( 0, 0.3 ),
-    sf::Vector2f( 0.4 , 0.4 )
+    sf::Vector2f( 0, 0.6 ) * SCALE,
+    sf::Vector2f( 0.8  , 0.8 ) * SCALE
 };
 
 const int shootInterval[] = {100, 80, 50};
@@ -182,21 +182,21 @@ Enemy::shoot( sf::Vector2f targetPosition )
     sf::Vector2f bulletSpeed;
     double theta = 0;
     if ( enemyNo == enemy1 ) {
-        bulletSpeed = sf::Vector2f(0, 2);
+        bulletSpeed = sf::Vector2f(0, 4) * SCALE;
     } else if ( enemyNo == enemy2 ) {
         float deltaX, deltaY;
         deltaX = myPosition.x -targetPosition.x;
         deltaY = myPosition.y - targetPosition.y;
         theta = atan( deltaX / deltaY );
         if ( deltaY>0 ) theta += PI;
-        bulletSpeed = sf::Vector2f( 2*sin(theta), 2*cos(theta) );
+        bulletSpeed = sf::Vector2f( sin(theta), cos(theta) ) * ( 4 * SCALE );
         theta = -theta * 360 /(2*PI);
     }
 
     ammo.push_back(
         Bullet(
             sf::IntRect(1004, 987, 9, 21),
-            sf::Vector2f(0.5f, 0.5f),
+            sf::Vector2f(SCALE, SCALE),
             myPosition,
             bulletSpeed,
             theta

@@ -76,9 +76,9 @@ Player::shoot( void )
     ammo.push_back(
         Bullet(
             sf::IntRect( 69, 78, 9, 21 ),
-            sf::Vector2f( 0.5f, 0.5f ),
-            this-> getPosition() + sf::Vector2f( 24.f, -10.f ),
-            sf::Vector2f( 0, -4 )
+            sf::Vector2f( SCALE, SCALE ),
+            this-> getPosition() + sf::Vector2f( 48, -20 ) * SCALE,
+            sf::Vector2f( 0, -8 ) * SCALE
             )
         );
 }
@@ -147,13 +147,13 @@ Player::setPosition(
     sf::Sprite::setPosition( position );
     int status = judgeOutOfBorder();
 
-    if ( status%3 == 1 ) position.x = -1.f;//Out left border
-    else if( status%3 ==2 ) position.x = 242.f - this-> getGlobalBounds().width;//Out right border
+    if ( status%3 == 1 ) position.x = -2 * SCALE;//Out left border
+    else if( status%3 ==2 ) position.x = WINDOW_SIZE_X + 4 * SCALE - this-> getGlobalBounds().width;//Out right border
 
     status /= 3;
 
-    if ( status%3 == 1 ) position.y = -1.f;//Out top border
-    else if( status%3 ==2 ) position.y = 406.f - this-> getGlobalBounds().height;//Out bottom border
+    if ( status%3 == 1 ) position.y = -2 * SCALE;//Out top border
+    else if( status%3 ==2 ) position.y = WINDOW_SIZE_Y + 12 * SCALE - this-> getGlobalBounds().height;//Out bottom border
 
     sf::Sprite::setPosition( position );
 }

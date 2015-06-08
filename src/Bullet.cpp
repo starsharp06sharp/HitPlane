@@ -30,7 +30,7 @@ Bullet::flash( void )
 bool
 Bullet::isDisappear( void )
 {
-    return ! this-> getGlobalBounds().intersects( sf::FloatRect(0.f, 0.f, 240.f, 400.f) );
+    return ! this-> getGlobalBounds().intersects( sf::FloatRect(0, 0, WINDOW_SIZE_X, WINDOW_SIZE_Y) );
 }
 
 bool

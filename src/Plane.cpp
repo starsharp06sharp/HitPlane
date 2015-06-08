@@ -36,11 +36,11 @@ int
     left = bound.left;
     right = left + bound.width;
 
-    if ( left <-1.f ) ans++;
-    else if ( 242.f < right ) ans += 2;
+    if ( left <-2 * SCALE ) ans++;
+    else if ( WINDOW_SIZE_X + 4 * SCALE < right ) ans += 2;
 
-    if ( top < -1.f ) ans += 3;
-    else if ( 406.f < bottom ) ans += 6;
+    if ( top < -2 * SCALE ) ans += 3;
+    else if ( WINDOW_SIZE_Y + 12 * SCALE < bottom ) ans += 6;
 
     return ans;
  }
