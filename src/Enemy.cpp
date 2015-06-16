@@ -187,9 +187,8 @@ Enemy::shoot( sf::Vector2f targetPosition )
         float deltaX, deltaY;
         deltaX = myPosition.x -targetPosition.x;
         deltaY = myPosition.y - targetPosition.y;
-        theta = atan( deltaX / deltaY );
-        if ( deltaY>0 ) theta += PI;
-        bulletSpeed = sf::Vector2f( sin(theta), cos(theta) ) * ( 4 * SCALE );
+        theta = atan2( deltaX, deltaY );
+        bulletSpeed = - sf::Vector2f( sin(theta), cos(theta) ) * ( 4 * SCALE );
         theta = -theta * 360 /(2*PI);
     }
 

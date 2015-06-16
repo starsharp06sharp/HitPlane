@@ -16,7 +16,7 @@ void
 Enemies::addEnemy( unsigned level )
 {
     //Create enemy1
-    if( enemy1Counter >= min( 200, 600 / level ) ) {
+    if( enemy1Counter >= 200 / ( log(level) / log(5) + 1 ) ) {
         enemies.push_back(
             Enemy(
                 enemy1,
@@ -29,7 +29,7 @@ Enemies::addEnemy( unsigned level )
     enemy1Counter++;
 
     //Create enemy2
-    if ( enemy2Counter >= min( 1000, 3000 / level ) ) {
+    if ( enemy2Counter >= 1000 / ( log(level) / log(5) + 1 ) ) {
         enemies.push_back(
             Enemy(
                 enemy2,
