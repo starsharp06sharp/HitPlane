@@ -1,10 +1,13 @@
 #ifndef SKY_H
 #define SKY_H
 
+#undef __STRICT_ANSI__
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <stdio.h>
 #include <list>
 #include <ctime>
+#include <iostream>
 
 #include "Moveable.h"
 #include "Plane.h"
@@ -12,7 +15,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Enemies.h"
-
+#include "Message.h"
 
 class Sky : public sf::RenderWindow {
 public:
@@ -22,18 +25,24 @@ public:
     bool
     showStartInterface( void );
 
-    void
-    mainLoop( void );
-
     bool
-    showGameOverInterface( void );
+    mainLoop( void );
 
 protected:
 
 private:
 
     void
-    pause( void );
+    pause(
+        Enemies& enemies,
+        Player& player
+        );
+
+    bool
+    showGameOverInterface(
+        Enemies& enemies,
+        Player& player
+        );
 
     sf::Texture textureBackground;
 
@@ -43,6 +52,10 @@ private:
     initBackground( void );
 
     sf::Music musicBGM;
+
+    sf::SoundBuffer bufferLvlup;
+
+    sf::Sound soundLvlup;
 
     void
     initMusic( void );
@@ -56,6 +69,31 @@ private:
     void
     initFont( void );
 
+    void
+    resize(
+        int newX,
+        int newY
+        );
+
+    Message
+    getScore( void );
+
+    Message
+    getLife(
+        int life
+        );
+
+    unsigned long long score;
+    unsigned level;
+
+    Message
+    getLevel( void );
+
+    void
+    drawGameInterface(
+        Enemies& enemies,
+        Player& player
+        );
 };
 
 #endif // SKY_H

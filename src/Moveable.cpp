@@ -25,3 +25,14 @@ Moveable::initTexture( void )
         exit( -1 );
     }
 }
+
+void
+Moveable::resize(
+    float preSCALE
+    )
+{
+    this->setPosition(
+        this->getPosition() / preSCALE * SCALE
+        );
+    this->setScale( SCALE, SCALE );
+}

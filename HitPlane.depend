@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1433577032 source:d:\runtimeerror\hitplane\main.cpp
+1434455956 source:d:\runtimeerror\hitplane\main.cpp
 	"Sky.h"
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics.hpp
@@ -483,13 +483,13 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1433575419 source:d:\runtimeerror\hitplane\src\moveable.cpp
+1434454891 source:d:\runtimeerror\hitplane\src\moveable.cpp
 	"Moveable.h"
 
-1433575416 d:\runtimeerror\hitplane\include\moveable.h
+1434454872 d:\runtimeerror\hitplane\include\moveable.h
 	<SFML/Graphics.hpp>
 	<stdlib.h>
-	<iostream>
+	"constDef.h"
 
 1433777863 source:d:\runtimeerror\hitplane\src\bullet.cpp
 	"Bullet.h"
@@ -506,10 +506,10 @@
 	"constDef.h"
 	"Moveable.h"
 
-1433780723 source:d:\runtimeerror\hitplane\src\player.cpp
+1434447503 source:d:\runtimeerror\hitplane\src\player.cpp
 	"Player.h"
 
-1433778461 d:\runtimeerror\hitplane\include\player.h
+1434446042 d:\runtimeerror\hitplane\include\player.h
 	<list>
 	<functional>
 	<SFML/Graphics.hpp>
@@ -518,7 +518,7 @@
 	"Bullet.h"
 	"Enemy.h"
 
-1433781022 source:d:\runtimeerror\hitplane\src\enemy.cpp
+1433812420 source:d:\runtimeerror\hitplane\src\enemy.cpp
 	<cmath>
 	"Enemy.h"
 
@@ -529,21 +529,23 @@
 	"Plane.h"
 	"Bullet.h"
 
-1433780052 source:d:\runtimeerror\hitplane\src\sky.cpp
+1434448534 source:d:\runtimeerror\hitplane\src\sky.cpp
 	"Sky.h"
-	"gameFunc.h"
 
-1433774495 d:\runtimeerror\hitplane\include\sky.h
+1434457833 d:\runtimeerror\hitplane\include\sky.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
+	<stdio.h>
 	<list>
 	<ctime>
+	<iostream>
 	"Moveable.h"
 	"Plane.h"
 	"Bullet.h"
 	"Player.h"
 	"Enemy.h"
 	"Enemies.h"
+	"Message.h"
 
 1433779878 source:d:\runtimeerror\hitplane\gamefunc.cpp
 	"gameFunc.h"
@@ -559,7 +561,7 @@
 	"Player.h"
 	"Enemy.h"
 
-1433773531 d:\runtimeerror\hitplane\include\enemies.h
+1434415426 d:\runtimeerror\hitplane\include\enemies.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<list>
@@ -569,8 +571,15 @@
 	"Player.h"
 	"Enemy.h"
 
-1433778659 source:d:\runtimeerror\hitplane\src\enemies.cpp
+1434446475 source:d:\runtimeerror\hitplane\src\enemies.cpp
 	"Enemies.h"
 
-1433780348 d:\runtimeerror\hitplane\include\constdef.h
+1434455972 d:\runtimeerror\hitplane\include\constdef.h
+
+1433846732 d:\runtimeerror\hitplane\include\message.h
+	<SFML/Graphics.hpp>
+	"constDef.h"
+
+1433849199 source:d:\runtimeerror\hitplane\src\message.cpp
+	"Message.h"
 

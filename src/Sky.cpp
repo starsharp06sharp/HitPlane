@@ -1,12 +1,9 @@
 #include "Sky.h"
 
-#include "gameFunc.h"
-
 Sky::Sky() :
     sf::RenderWindow(
         sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y),
-        "HitPlane By L.Zheng",
-        sf::Style::Close
+        "HitPlane By L.Zheng"
         )
 {
     this->setFramerateLimit( 60 );
@@ -41,6 +38,14 @@ Sky::initMusic( void )
     this->musicBGM.setVolume(100);
     this->musicBGM.setLoop(true);
 
+    //Init Lvlup sound
+    if( !bufferLvlup.loadFromFile( "achievement.ogg" ) ){
+        //Exit when sound file is broken
+        exit(-1);
+    }
+    soundLvlup.setBuffer( bufferLvlup );
+    soundLvlup.setVolume( 100 );
+
     //Init sound effect of ecah object
     Bullet::initSound();
     Enemy::initSound();
@@ -67,7 +72,7 @@ Sky::initFont( void )
     }
 }
 
-void
+bool
 Sky::mainLoop( void )
 {
 
@@ -79,7 +84,8 @@ Sky::mainLoop( void )
             3
             );
 
-    unsigned long long score = 0;
+    score = 0;
+    level = 1;
     unsigned shootCounter = 0;
     Enemies enemies;
 
@@ -103,6 +109,11 @@ Sky::mainLoop( void )
                 this->close();
             }
 
+            //Auto resize
+            if ( event.type == sf::Event::Resized ) {
+                this->resize( event.size.width, event.size.height );
+            }
+
             if ( event.type == sf::Event::KeyPressed &&
                  event.key.code == sf::Keyboard::Comma ) {
                 player.addLife();
@@ -110,24 +121,23 @@ Sky::mainLoop( void )
 
             if( event.type == sf::Event::KeyPressed &&
                 event.key.code == sf::Keyboard::P ) {
-                    this->pause();
+                    this->pause( enemies, player );
                 }
         }
 
        //Add enemy if it is the right time
-        enemies.addEnemy();
+        enemies.addEnemy( level );
 
         //flash all enemies and theirs bullets
         enemies.flashAll( player );
 
         //Move player
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*this);
-        player.setPosition(sf::Vector2f(mousePosition.x - 48 * SCALE, mousePosition.y - 64 * SCALE));
+        player.setPosition( sf::Vector2f( mousePosition.x / nowSCALE - 48, mousePosition.y / nowSCALE - 64) * SCALE );
 
         //Player shoot
-        if ( shootCounter >= 30 && sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
+        if ( sf::Mouse::isButtonPressed(sf::Mouse::Left) ) {
             player.shoot();
-            shootCounter = 0;
         }
 
         //Flash all player bullet and player itself
@@ -143,23 +153,8 @@ Sky::mainLoop( void )
 
         this->clear();
 
-        //drawBackground
-        this->draw(spriteBackground);
+        this->drawGameInterface( enemies, player );
 
-        //Draw all enemy
-        enemies.draw( *this );
-
-        //Draw all enemy bullet
-        Enemy::drawAllBullet( *this );
-
-        //Draw all player bullet and player itself
-        player.draw(*this);
-
-        //Draw score
-        this->draw( getScore( scoreFont, score ) );
-
-        //Draw life
-        this->draw( getLife( promptFont, player.getLife() ) );
 
         this->display();
 
@@ -170,32 +165,27 @@ Sky::mainLoop( void )
     //Dead:
     musicBGM.stop();
     this->setMouseCursorVisible( true );
+    return this->showGameOverInterface( enemies, player );
 }
 
 bool
 Sky::showStartInterface( void )
 {
-    sf::Text title;
-    title.setFont( yaheiFont );
-    title.setCharacterSize( 84 *SCALE );
-    title.setColor( sf::Color::Red );
-    title.setString(L"打 灰 机");
-    title.setPosition(
-            sf::Vector2f(
-                240 * SCALE - title.getGlobalBounds().width / 2,
-                400 * SCALE - title.getGlobalBounds().height / 2
-                )
-            );
-
-    sf::Text clickStartMessage;
-    clickStartMessage.setFont( promptFont );
-    clickStartMessage.setCharacterSize( 32 * SCALE );
-    clickStartMessage.setColor( sf::Color::Red );
-    clickStartMessage.setString( "Click to start" );
-    clickStartMessage.setPosition(
-        title.getGlobalBounds().left + title.getGlobalBounds().width / 2 - clickStartMessage.getGlobalBounds().width / 2,
-        title.getGlobalBounds().top + title.getGlobalBounds().height
+    Message title(
+        L"打 灰 机",
+        yaheiFont,
+        84 * SCALE,
+        sf::Color::Red,
+        Pos::Hmiddle + Pos::Vmiddle
         );
+
+    Message clickStartMessage(
+        L"Click to start",
+        promptFont,
+        32 * SCALE,
+        sf::Color::Red,
+        Driect::Down,
+        title);
 
     while( this->isOpen() ) {
 
@@ -206,7 +196,10 @@ Sky::showStartInterface( void )
                 this->close();
                 return false;
             }
-
+            //Auto resize
+            if ( event.type == sf::Event::Resized ) {
+                this->resize( event.size.width, event.size.height );
+            }
             if( event.type == sf::Event::KeyPressed ||
                 event.type == sf::Event::MouseButtonPressed ) {
                 return true;
@@ -222,34 +215,27 @@ Sky::showStartInterface( void )
 }
 
 bool
-Sky::showGameOverInterface( void )
+Sky::showGameOverInterface(
+    Enemies& enemies,
+    Player& player
+    )
 {
-    sf::Text loseMessage;
-    loseMessage.setFont( promptFont );
-    loseMessage.setCharacterSize( 84 * SCALE );
-    loseMessage.setColor( sf::Color::Red );
-    loseMessage.setString("GAME OVER");
-    loseMessage.setPosition(
-        sf::Vector2f(
-            240 * SCALE - loseMessage.getGlobalBounds().width / 2,
-            400 * SCALE - loseMessage.getGlobalBounds().height / 2
-            )
+    Message loseMessage(
+        L"GAME OVER",
+        promptFont,
+        84 * SCALE,
+        sf::Color::Red,
+        Pos::Hmiddle + Pos::Vmiddle
         );
 
-    sf::Text clickToRestartMessage;
-    clickToRestartMessage.setFont( promptFont );
-    clickToRestartMessage.setCharacterSize( 32 *SCALE );
-    clickToRestartMessage.setColor( sf::Color::Red );
-    clickToRestartMessage.setString( "Click to restart" );
-    clickToRestartMessage.setPosition(
-        loseMessage.getGlobalBounds().left + loseMessage.getGlobalBounds().width / 2 - clickToRestartMessage.getGlobalBounds().width / 2,
-        loseMessage.getGlobalBounds().top + loseMessage.getGlobalBounds().height
+    Message clickToRestartMessage(
+        L"Click to restart",
+        promptFont,
+        32 * SCALE,
+        sf::Color::Red,
+        Driect::Down,
+        loseMessage
         );
-
-     //Show lose message
-    this->draw(loseMessage);
-    this->draw(clickToRestartMessage);
-    this->display();
 
     while ( this->isOpen() ) {
 
@@ -260,33 +246,40 @@ Sky::showGameOverInterface( void )
                 this->close();
                 return false;
             }
-
+            //Auto resize
+            if ( event.type == sf::Event::Resized ) {
+                this->resize( event.size.width, event.size.height );
+            }
             if ( event.type == sf::Event::KeyPressed ||
                  event.type == sf::Event::MouseButtonPressed ) {
                 return true;
             }
         }
+        this->clear();
+        this->drawGameInterface( enemies,player );
+        this->draw(loseMessage);
+        this->draw(clickToRestartMessage);
+        this->display();
     }
     return false;
 }
 
 void
-Sky::pause( void )
+Sky::pause(
+    Enemies& enemies,
+    Player& player
+)
 {
     musicBGM.pause();
     this->setMouseCursorVisible( true );
 
-    sf::Text pausedMessage;
-    pausedMessage.setFont( promptFont );
-    pausedMessage.setCharacterSize( 40 *SCALE );
-    pausedMessage.setColor( sf::Color::Red );
-    pausedMessage.setString( "Press 'P' to resume" );
-    pausedMessage.setPosition(
-        240 * SCALE - pausedMessage.getGlobalBounds().width / 2,
-        400 * SCALE - pausedMessage.getGlobalBounds().height / 2
+    Message pausedMessage(
+        L"Press 'P' to resume",
+        promptFont,
+        40 * SCALE,
+        sf::Color::Red,
+        Pos::Vmiddle + Pos::Hmiddle
         );
-    this->draw( pausedMessage );
-    this->display();
 
     while( this->isOpen() ) {
         sf::Event event;
@@ -296,16 +289,130 @@ Sky::pause( void )
                 this->close();
                 return;
             }
+            //Auto resize
+            if ( event.type == sf::Event::Resized ) {
+                this->resize( event.size.width, event.size.height );
+            }
             //Return when pause are pressed
             if( event.type == sf::Event::KeyPressed &&
                 event.key.code == sf::Keyboard::P ) {
                     //Recover before return
                     this->setMouseCursorVisible( false );
                     musicBGM.play();
-
                     return;
             }
+            this->clear();
+            this->drawGameInterface( enemies, player );
+            this->draw( pausedMessage );
+            this->display();
         }
         //Draw nothing
     }
+}
+
+Message
+Sky::getScore( void )
+{
+    wchar_t scoreStr[40];
+    swprintf( scoreStr, L"Score : %I64u", score );
+    Message scoreMessage(
+        scoreStr,
+        this->scoreFont,
+        36 * SCALE,
+        sf::Color::Blue,
+        Pos::Top + Pos::Left
+        );
+    return scoreMessage;
+}
+
+Message
+Sky::getLife(
+    int life
+    )
+{
+    wchar_t lifeStr[20];
+    int i;
+    for (i = 0; i < life; i++) lifeStr[i] = L'♥';
+    lifeStr[i] = '\0';
+    Message lifeMessage(
+        lifeStr,
+        this->promptFont,
+        60 *SCALE,
+        sf::Color::Red,
+        Pos::Top + Pos::Right
+        );
+    lifeMessage.setPosition(
+        lifeMessage.getPosition() - sf::Vector2f( 10, 20 ) * SCALE
+        );
+    return lifeMessage;
+}
+
+Message
+Sky::getLevel( void )
+{
+    int nowLevel = 1 + score / 20;
+    if ( nowLevel > level ) {
+        //Level up
+        soundLvlup.play();
+        level = nowLevel;
+    }
+    wchar_t levelStr[40];
+    swprintf( levelStr, L"Level:%u", level );
+
+    Message levelMessage(
+        levelStr,
+        this->scoreFont,
+        36 * SCALE,
+        sf::Color::Blue,
+        Pos::Bottom + Pos::Left
+        );
+
+    levelMessage.setPosition(
+        levelMessage.getPosition() + sf::Vector2f( 0, -15 ) * SCALE
+        );
+
+    return levelMessage;
+}
+
+void
+Sky::resize(
+    int newX,
+    int newY
+    )
+{
+    nowSCALE = newY / 800.0;
+    this->setSize(
+        sf::Vector2u(
+            480 * nowSCALE,
+            800 * nowSCALE
+            )
+        );
+}
+
+void
+Sky::drawGameInterface(
+    Enemies& enemies,
+    Player& player
+    )
+{
+    //drawBackground
+    this->draw( this->spriteBackground );
+
+    //Draw all enemy
+    enemies.draw( *this );
+
+    //Draw all enemy bullet
+    Enemy::drawAllBullet( *this );
+
+    //Draw all player bullet and player itself
+    player.draw( *this );
+
+    //Draw score
+    this->draw( this->getScore() );
+
+    //Draw life
+    this->draw( this->getLife( player.getLife() ) );
+
+    //Draw level
+    this->draw( this->getLevel() );
 }

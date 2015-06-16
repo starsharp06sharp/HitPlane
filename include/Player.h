@@ -71,6 +71,10 @@ private:
 
     std::list<Bullet> ammo;
 
+    bool whichFrameToDisplay = 0;
+
+    int changeFrameCounter = 0;
+
     int deadCounter;
     /*
     *This counter repesents the different stage of dead plane:
@@ -82,6 +86,12 @@ private:
     /*
     *This counter can control the speed of explode action.
     *Every to number play one frame.
+    */
+
+    unsigned shootCounter;
+    /*
+    *This counter control the shoot frequency of the enemy.
+    *The frequency depends on the array shootInterval[]
     */
 
     static sf::SoundBuffer bufferExplode;

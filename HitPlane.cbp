@@ -49,20 +49,20 @@
 		<Linker>
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.3/lib" />
 		</Linker>
-		<Unit filename="gameFunc.cpp" />
 		<Unit filename="include/Bullet.h" />
 		<Unit filename="include/Enemies.h" />
 		<Unit filename="include/Enemy.h" />
+		<Unit filename="include/Message.h" />
 		<Unit filename="include/Moveable.h" />
 		<Unit filename="include/Plane.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Sky.h" />
 		<Unit filename="include/constDef.h" />
-		<Unit filename="include/gameFunc.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Bullet.cpp" />
 		<Unit filename="src/Enemies.cpp" />
 		<Unit filename="src/Enemy.cpp" />
+		<Unit filename="src/Message.cpp" />
 		<Unit filename="src/Moveable.cpp" />
 		<Unit filename="src/Plane.cpp" />
 		<Unit filename="src/Player.cpp" />

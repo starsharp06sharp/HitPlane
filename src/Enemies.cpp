@@ -1,5 +1,10 @@
 #include "Enemies.h"
 
+inline int min( int a, int b )
+{
+    return a<b ? a : b;
+}
+
 Enemies::Enemies() :
     enemy1Counter( 0 ),
     enemy2Counter( 0 )
@@ -8,15 +13,15 @@ Enemies::Enemies() :
 }
 
 void
-Enemies::addEnemy( void )
+Enemies::addEnemy( unsigned level )
 {
     //Create enemy1
-    if( enemy1Counter == 120 ) {
+    if( enemy1Counter >= min( 200, 600 / level ) ) {
         enemies.push_back(
             Enemy(
                 enemy1,
                 sf::Vector2f(SCALE, SCALE),
-                sf::Vector2f( rand()% (int)(WINDOW_SIZE_X - 57 * SCALE), 0)
+                sf::Vector2f( rand()% (int)( WINDOW_SIZE_X - 57 * SCALE ), 0)
                 )
             );
         enemy1Counter = 0;
@@ -24,7 +29,7 @@ Enemies::addEnemy( void )
     enemy1Counter++;
 
     //Create enemy2
-    if ( enemy2Counter == 600 ) {
+    if ( enemy2Counter >= min( 1000, 3000 / level ) ) {
         enemies.push_back(
             Enemy(
                 enemy2,

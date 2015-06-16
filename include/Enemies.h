@@ -17,7 +17,7 @@ public:
     Enemies();
 
     void
-    addEnemy( void );
+    addEnemy( unsigned level );
 
     void
     flashAll(

@@ -1,16 +1,16 @@
 #include "Player.h"
 
-const sf::IntRect livePlaneToDisplay[] =
+const int shootInterval = 30;
+
+const sf::IntRect changeToDisplay[] =
 /*
 *This array storge the position rectangle in texture
-* of player in different life.
-*E.g. livePlaneToDisplay [lifeRemain]
+* of player in different frames
+*E.g. livePlaneToDisplay [0/1]
 */
 {
-    sf::IntRect(),
-    sf::IntRect( 165, 360, 102, 126 ),//life = 1
-    sf::IntRect( 165, 360, 102, 126 ),//life = 2,the same
-    sf::IntRect( 0, 99, 102, 126 )//life = 3
+    sf::IntRect( 165, 360, 102, 126 ),
+    sf::IntRect( 0, 99, 102, 126 )
 };
 
 const sf::IntRect deadPlaneToDisplay[] =
@@ -45,7 +45,8 @@ Player::Player(
             originPos,
             life
             ),
-        deadCounter( 0 )
+        deadCounter( 0 ),
+        shootCounter( 0 )
 {
     //Do nothing
 }
@@ -73,14 +74,17 @@ Player::initSound( void )
 void
 Player::shoot( void )
 {
-    ammo.push_back(
-        Bullet(
-            sf::IntRect( 69, 78, 9, 21 ),
-            sf::Vector2f( SCALE, SCALE ),
-            this-> getPosition() + sf::Vector2f( 48, -20 ) * SCALE,
-            sf::Vector2f( 0, -8 ) * SCALE
-            )
-        );
+    if ( shootCounter > shootInterval ){
+        ammo.push_back(
+            Bullet(
+                sf::IntRect( 69, 78, 9, 21 ),
+                sf::Vector2f( SCALE, SCALE ),
+                this-> getPosition() + sf::Vector2f( 48, -20 ) * SCALE,
+                sf::Vector2f( 0, -8 ) * SCALE
+                )
+            );
+        shootCounter = 0;
+    }
 }
 
 void
@@ -93,19 +97,28 @@ Player::flash( void )
     ammo.remove_if(
         []( Bullet& bullet ) {return bullet.isDisappear();}
         );
+    shootCounter++;
 
     if( deadCounter > 0 ) {
         if( deadDelayConuter == 10 ) {
-            if( deadCounter++ > 4 )
+            if( deadCounter++ > 4 ) {
                 this-> disappear = true;
-            else {
+            } else {
                 this-> setTextureRect(
                     deadPlaneToDisplay [deadCounter]
                     );
             }
             deadDelayConuter = 0;
-        } else
+        } else {
             deadDelayConuter++;
+        }
+    } else {
+        if ( ++changeFrameCounter > 6 ) {
+            this-> setTextureRect(
+                changeToDisplay[whichFrameToDisplay = !whichFrameToDisplay]
+                );
+            changeFrameCounter = 0;
+        }
     }
 }
 
@@ -184,11 +197,9 @@ void
 Player::getHit( void )
 {
     life--;
-    soundGetHit.play();
+
     if ( life > 0 ) {
-        this-> setTextureRect(
-            livePlaneToDisplay[life]
-            );
+        soundGetHit.play();
     } else if ( life == 0 ) {
         deadCounter = 1;
         soundExplode.play();

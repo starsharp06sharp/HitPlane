@@ -4,12 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 
-#include <iostream>
+#include "constDef.h"
 
 class Moveable : public sf::Sprite {
 public:
 
     Moveable() {}
+
+    void
+    resize(
+        float preSCALE
+        );
 
     Moveable(
         sf::IntRect aeraToDisplay,
