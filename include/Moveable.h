@@ -11,11 +11,6 @@ public:
 
     Moveable() {}
 
-    void
-    resize(
-        float preSCALE
-        );
-
     Moveable(
         sf::IntRect aeraToDisplay,
         sf::Vector2f scale,
@@ -25,6 +20,19 @@ public:
 
     static void
     initTexture( void );
+
+
+    void
+    resize(
+        float preSCALE
+        );
+
+
+    virtual void
+    flash( void ) = 0;
+
+    virtual bool
+    isDisappear( void ) = 0;
 
 protected:
 

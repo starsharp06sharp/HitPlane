@@ -77,9 +77,6 @@ Enemy::Enemy(
             maxLife [ enemyNo ]//life
             ),
         enemyNo( enemyNo ),
-        speed(
-            initSpeed[ enemyNo ]
-            ),
         deadCounter( 0 ),
         shootCounter( 0 )
 {
@@ -91,7 +88,7 @@ Enemy::flash( void )
 {
     if ( deadCounter <= 0 ) {
 
-        this-> move();
+        this-> move( initSpeed[enemyNo] );
 
     } else {
 
@@ -125,12 +122,6 @@ Enemy::getHit( void )
     }
 }
 
-bool
-Enemy::isDisappear( void )
-{
-    return this->disappear;
-}
-
 void
 Enemy::initSound( void )
 {
@@ -155,12 +146,6 @@ enemyStyle
 Enemy::getEnemyNo( void )
 {
     return enemyNo;
-}
-
-bool
-Enemy::isDead( void )
-{
-    return ( life <= 0 );
 }
 
 void
@@ -223,7 +208,9 @@ Enemy::flashAmmo( void )
 }
 
 void
-Enemy::move( void )
+Enemy::move(
+    sf::Vector2f speed
+    )
 {
     sf::Sprite::move( speed );
 
@@ -231,7 +218,7 @@ Enemy::move( void )
 
     if( status % 3 > 0 )//Out left or right border
     {
-        this->speed =
+        speed =
         sf::Vector2f(
             -speed.x,
             speed.y

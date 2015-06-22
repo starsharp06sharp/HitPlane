@@ -29,7 +29,7 @@ class Message : public sf::Text {
 public:
 
     Message(
-        wchar_t* str,
+        const wchar_t* str,
         sf::Font& font,
         int size,
         sf::Color color,
@@ -37,7 +37,7 @@ public:
         );
 
     Message(
-        wchar_t* str,
+        const wchar_t* str,
         sf::Font& font,
         int size,
         sf::Color color,

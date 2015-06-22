@@ -19,11 +19,6 @@ Plane::Plane(
 
 int
  Plane::judgeOutOfBorder( void )
-/*
-*This function returns a two-bit ternary numbers
-*that each bit repestent the x-pos or y-pos
-*is corss the border or not.(left/top border:1, right/bottom border:2)
-*/
  {
     int ans=0;
     float top,bottom;
@@ -44,3 +39,31 @@ int
 
     return ans;
  }
+
+ int
+Plane::getLife( void )
+{
+    return this->life;
+}
+
+sf::Vector2f
+Plane::getCenter( void )
+{
+    sf::FloatRect myBound = this->getGlobalBounds();
+    return sf::Vector2f(
+        myBound.left + myBound.width / 2,
+        myBound.top + myBound.height / 2
+        );
+}
+
+bool
+Plane::isDead( void )
+{
+    return ( life <= 0 );
+}
+
+bool
+Plane::isDisappear( void )
+{
+    return this->disappear;
+}

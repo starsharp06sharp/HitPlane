@@ -36,7 +36,9 @@ public:
     getEnemyNo( void );
 
     void
-    move();
+    move(
+        sf::Vector2f speed
+        );
 
     void
     flash( void );
@@ -44,14 +46,10 @@ public:
     void
     getHit( void );
 
-    bool
-    isDead( void );
-
-    bool
-    isDisappear( void );
-
     void
-    shoot( sf::Vector2f targetPosition );
+    shoot(
+        sf::Vector2f targetPosition
+        );
 
     static bool
     hitPlayer( Player& player );
@@ -69,8 +67,6 @@ private:
     enemyStyle enemyNo;
 
     static std::list<Bullet> ammo;
-
-    sf::Vector2f speed;
 
     int deadCounter;
     /*

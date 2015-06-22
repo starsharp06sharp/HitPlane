@@ -1,7 +1,7 @@
 #include "Message.h"
 
 Message::Message(
-    wchar_t* str,
+    const wchar_t* str,
     sf::Font& font,
     int size,
     sf::Color color,
@@ -40,7 +40,7 @@ Message::Message(
 }
 
 Message::Message(
-    wchar_t* str,
+    const wchar_t* str,
     sf::Font& font,
     int size,
     sf::Color color,

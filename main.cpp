@@ -1,6 +1,6 @@
 #include "Sky.h"
 
-float nowSCALE = 0.8;
+float nowSCALE = SCALE;
 
 int main( void ) {
     Sky sky;

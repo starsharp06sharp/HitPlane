@@ -1,237 +1,190 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.2">
-  <zoom_level>7</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>259</x>
-      <y>112</y>
-      <w>147</w>
-      <h>42</h>
+      <x>10</x>
+      <y>90</y>
+      <w>210</w>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>/Moveable/
+    <panel_attributes>_/Moveable/_
 --
-static void
-    initTexture( void );</panel_attributes>
+/void flash()/
+/bool isDisappear()/
+void resize( float preSCALE )
+_void initTexture()_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>518</x>
-      <y>224</y>
-      <w>168</w>
-      <h>42</h>
+      <x>380</x>
+      <y>230</y>
+      <w>260</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>_Plane_
 --
-int
-    judgeOutOfBorder( void );</panel_attributes>
+/void move( sf::Vector2f speed )/
+/void setPosition( sf::Vector2f position )/
+/void getHit()/
+/void shoot()/
+/void shoot( sf::Vector2f targetPosition )/
+bool isDead()
+int judgeOutOfBorder()
+sf::Vector2f getCenter()
+int getLife()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>399</x>
-      <y>119</y>
-      <w>147</w>
-      <h>119</h>
+      <x>210</x>
+      <y>100</y>
+      <w>210</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;190.0;150.0</additional_attributes>
+    <additional_attributes>10.0;10.0;190.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>259</x>
-      <y>224</y>
-      <w>147</w>
-      <h>119</h>
+      <x>10</x>
+      <y>230</y>
+      <w>210</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>_Bullet_
 --
-static void
-    initSound( void );
---
-void
-    flash( void );
---
-bool
-    isDisappear( void );
---
-bool
-    hit( FloatRect target );</panel_attributes>
+bool hit( sf::FloatRect target )
+_void initSound()_
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>322</x>
-      <y>147</y>
-      <w>21</w>
-      <h>91</h>
+      <x>100</x>
+      <y>180</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>518</x>
-      <y>301</y>
-      <w>168</w>
-      <h>301</h>
+      <x>380</x>
+      <y>450</y>
+      <w>260</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>_Player_
 --
-static void
-    initSound( void );
---
-void
-  setPosition( Vector2f position );
---
-void
-    flash( void );
---
-void
-    getHit( void );
---
-bool
-    isDead( void );
---
-bool
-    isDisappear( void );
---
-void
-    shoot( void );
---
-bool
-    hitEnemy( Enemy&amp; enemy);
---
-void
-    draw( RenderWindow&amp; window );
---
-int
-    getLife( void );
---
-void
-    addLife( void );</panel_attributes>
+bool hitEnemy( Enemy&amp; enemy )
+void draw( sf::RenderWindow&amp; window )
+void addLife()
+_void initSound()_
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>721</x>
-      <y>301</y>
-      <w>210</w>
-      <h>329</h>
+      <x>670</x>
+      <y>450</y>
+      <w>310</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>_Enemy_
 --
-static void
-    initSound( void );
---
-static void
-    clearBullet( void );
---
- enemyStyle
-    getEnemyNo( void );
---
-void
-    move();
---
-void
-    flash( void );
---
-void
-    getHit( void );
---
-bool
-    isDead( void );
---
-bool
-    isDisappear( void );
---
-void
-    shoot( sf::Vector2f targetPosition );
---
-static bool
-    hitPlayer( Player&amp; player );
---
- static void
-    flashAmmo( void );
---
-static void
-    drawAllBullet( sf::RenderWindow&amp; window );
+enemyStyle getEnemyNo()
+_bool hitPlayer( Player&amp; player )_
+_void flashAmmo()_
+_void drawAllBullet( sf::RenderWindow&amp; window )_
+_void initSound()_
+_void clearBullet()_
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>581</x>
-      <y>259</y>
-      <w>21</w>
-      <h>56</h>
+      <x>500</x>
+      <y>400</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>679</x>
-      <y>231</y>
-      <w>161</w>
-      <h>84</h>
+      <x>630</x>
+      <y>240</y>
+      <w>210</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;210.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;190.0;210.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>259</x>
-      <y>0</y>
-      <w>147</w>
-      <h>14</h>
+      <x>10</x>
+      <y>20</y>
+      <w>210</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>_sf::Sprite_
 --
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>322</x>
-      <y>7</y>
-      <w>21</w>
-      <h>119</h>
+      <x>100</x>
+      <y>40</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>690</x>
+      <y>90</y>
+      <w>270</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>_Enemies_
+--
+void addEnemy( unsigned level 
+void flashAll( Player&amp; player )
+bool hit( Player&amp; player )
+unsigned judge( Player&amp; player )
+void draw( sf::RenderWindow&amp; window )
+</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>399</x>
-      <y>231</y>
-      <w>133</w>
-      <h>91</h>
+      <x>810</x>
+      <y>200</y>
+      <w>30</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;170.0;110.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>378</x>
-      <y>336</y>
-      <w>357</w>
-      <h>308</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;420.0;490.0;410.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;250.0</additional_attributes>
   </element>
 </diagram>

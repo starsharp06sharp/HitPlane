@@ -23,9 +23,6 @@ public:
         int life
         );
 
-    sf::Vector2f
-    getCenter( void );
-
     static void
     initSound( void );
 
@@ -36,12 +33,6 @@ public:
 
     void
     getHit( void );
-
-    bool
-    isDead( void );
-
-    bool
-    isDisappear( void );
 
     void
     shoot( void );
@@ -58,9 +49,6 @@ public:
     draw(
         sf::RenderWindow& window
         );
-
-    int
-    getLife( void );
 
     void
     addLife( void );

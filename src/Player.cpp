@@ -1,6 +1,6 @@
 #include "Player.h"
 
-const int shootInterval = 30;
+const unsigned shootInterval = 30;
 
 const sf::IntRect changeToDisplay[] =
 /*
@@ -171,28 +171,6 @@ Player::setPosition(
     sf::Sprite::setPosition( position );
 }
 
-sf::Vector2f
-Player::getCenter( void )
-{
-    sf::FloatRect myBound = this->getGlobalBounds();
-    return sf::Vector2f(
-        myBound.left + myBound.width / 2,
-        myBound.top + myBound.height / 2
-        );
-}
-
-bool
-Player::isDead( void )
-{
-    return ( life <= 0 );
-}
-
-bool
-Player::isDisappear( void )
-{
-    return this->disappear;
-}
-
 void
 Player::getHit( void )
 {
@@ -205,12 +183,6 @@ Player::getHit( void )
         soundExplode.play();
         deadDelayConuter = 0;
     }
-}
-
-int
-Player::getLife( void )
-{
-    return this->life;
 }
 
 void

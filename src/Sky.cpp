@@ -350,7 +350,7 @@ Sky::getLife(
 Message
 Sky::getLevel( void )
 {
-    int nowLevel = 1 + score / 25;
+    unsigned nowLevel = 1 + score / 25;
     if ( nowLevel > level ) {
         //Level up
         soundLvlup.play();
