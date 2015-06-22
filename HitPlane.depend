@@ -502,7 +502,7 @@
 1434964552 source:d:\runtimeerror\hitplane\src\plane.cpp
 	"Plane.h"
 
-1434964725 d:\runtimeerror\hitplane\include\plane.h
+1434992180 d:\runtimeerror\hitplane\include\plane.h
 	"constDef.h"
 	"Moveable.h"
 
@@ -518,11 +518,11 @@
 	"Bullet.h"
 	"Enemy.h"
 
-1434964519 source:d:\runtimeerror\hitplane\src\enemy.cpp
+1434992456 source:d:\runtimeerror\hitplane\src\enemy.cpp
 	<cmath>
 	"Enemy.h"
 
-1434964507 d:\runtimeerror\hitplane\include\enemy.h
+1434992443 d:\runtimeerror\hitplane\include\enemy.h
 	<list>
 	<cmath>
 	"Player.h"

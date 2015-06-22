@@ -31,9 +31,7 @@ public:
     getLife( void );
 
     virtual void
-    move(
-        sf::Vector2f speed
-        ) {};
+    move( void ) {};
 
     virtual void
     setPosition(

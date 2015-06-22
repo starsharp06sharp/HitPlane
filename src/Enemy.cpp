@@ -76,6 +76,7 @@ Enemy::Enemy(
             originPos,
             maxLife [ enemyNo ]//life
             ),
+        speed( initSpeed[ enemyNo ] ),
         enemyNo( enemyNo ),
         deadCounter( 0 ),
         shootCounter( 0 )
@@ -88,7 +89,7 @@ Enemy::flash( void )
 {
     if ( deadCounter <= 0 ) {
 
-        this-> move( initSpeed[enemyNo] );
+        this-> move();
 
     } else {
 
@@ -208,17 +209,15 @@ Enemy::flashAmmo( void )
 }
 
 void
-Enemy::move(
-    sf::Vector2f speed
-    )
+Enemy::move( void )
 {
-    sf::Sprite::move( speed );
+    sf::Sprite::move( this->speed );
 
     int status = this->judgeOutOfBorder();
 
     if( status % 3 > 0 )//Out left or right border
     {
-        speed =
+        this->speed =
         sf::Vector2f(
             -speed.x,
             speed.y

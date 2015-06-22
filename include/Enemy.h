@@ -36,9 +36,7 @@ public:
     getEnemyNo( void );
 
     void
-    move(
-        sf::Vector2f speed
-        );
+    move( void );
 
     void
     flash( void );
@@ -67,6 +65,8 @@ private:
     enemyStyle enemyNo;
 
     static std::list<Bullet> ammo;
+
+    sf::Vector2f speed;
 
     int deadCounter;
     /*

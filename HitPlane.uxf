@@ -27,7 +27,7 @@ _void initTexture()_</panel_attributes>
     </coordinates>
     <panel_attributes>_Plane_
 --
-/void move( sf::Vector2f speed )/
+/void move()/
 /void setPosition( sf::Vector2f position )/
 /void getHit()/
 /void shoot()/
