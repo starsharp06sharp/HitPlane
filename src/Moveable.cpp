@@ -19,7 +19,7 @@ Moveable::Moveable(
 void
 Moveable::initTexture( void )
 {
-    if ( !planes.loadFromFile( "Planes.png" ) ) {
+    if ( !planes.loadFromFile( "./resources/textures/Planes.png" ) ) {
         //Exit when plane's texture is broken
         //system( "pause" );
         exit( -1 );

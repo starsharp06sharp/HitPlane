@@ -16,7 +16,7 @@ Sky::Sky() :
 void
 Sky::initBackground( void )
 {
-    if (!this->textureBackground.loadFromFile("Background.png")) {
+    if (!this->textureBackground.loadFromFile("./resources/textures/Background.png")) {
         //Exit when plane's texture is broken
         //system("pause");
         exit(-1);
@@ -30,7 +30,7 @@ void
 Sky::initMusic( void )
 {
     //Create BGM
-    if (!this->musicBGM.openFromFile("TURKY.WAV")) {
+    if (!this->musicBGM.openFromFile("./resources/backgroundmusic.wav")) {
         //Exit when music file is broken
         //system("pause");
         exit (-1);
@@ -39,7 +39,7 @@ Sky::initMusic( void )
     this->musicBGM.setLoop(true);
 
     //Init Lvlup sound
-    if( !bufferLvlup.loadFromFile( "achievement.ogg" ) ){
+    if( !bufferLvlup.loadFromFile( "./resources/sound/achievement.ogg" ) ){
         //Exit when sound file is broken
         exit(-1);
     }
@@ -56,17 +56,17 @@ void
 Sky::initFont( void )
 {
     //Load font from file
-    if ( !this->promptFont.loadFromFile("courbd.ttf") ) {
+    if ( !this->promptFont.loadFromFile("./resources/fonts/courbd.ttf") ) {
         //system( "pause" );
         exit( -1 );
     }
 
-    if ( !this->scoreFont.loadFromFile("LHANDW.TTF") ){
+    if ( !this->scoreFont.loadFromFile("./resources/fonts/lhandw.ttf") ){
         //system( "pause" );
         exit( -1 );
     }
 
-    if( !this->yaheiFont.loadFromFile("msyh.ttf") ){
+    if( !this->yaheiFont.loadFromFile("./resources/fonts/msyh.ttf") ){
         //system( "pause" );
         exit( -1 );
     }

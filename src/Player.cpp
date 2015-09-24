@@ -54,7 +54,7 @@ Player::Player(
 void
 Player::initSound( void )
 {
-    if( !bufferGetHit.loadFromFile("get_hit.ogg") ) {
+    if( !bufferGetHit.loadFromFile("./resources/sound/get_hit.ogg") ) {
         //Exit when sound file is broken
         //system("pause");
         exit(-1);
@@ -62,7 +62,7 @@ Player::initSound( void )
     soundGetHit.setBuffer(bufferGetHit);
     soundGetHit.setVolume(100);
 
-    if( !bufferExplode.loadFromFile("game_over.ogg") ) {
+    if( !bufferExplode.loadFromFile("./resources/sound/game_over.ogg") ) {
         //Exit when sound file is broken
         //system("pause");
         exit(-1);

@@ -126,13 +126,13 @@ Enemy::getHit( void )
 void
 Enemy::initSound( void )
 {
-    char soundFileName[] = "enemy1_down.ogg";
+    char soundFileName[] = "./resources/sound/enemy1_down.ogg";
     for (int i = enemy1;
            i <= enemy2;
            i++
           )
     {
-        soundFileName[5] = '1' + i;
+        soundFileName[23] = '1' + i;
         if( !bufferExplode[i].loadFromFile(soundFileName) ) {
             //Exit when sound file is broken
             //system("pause");

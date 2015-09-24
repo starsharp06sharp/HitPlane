@@ -44,7 +44,7 @@ Bullet::hit(
 void
 Bullet::initSound( void )
 {
-    if(!bufferShoot.loadFromFile("bullet.ogg")) {
+    if(!bufferShoot.loadFromFile("./resources/sound/bullet.ogg")) {
         //Exit when sound file is broken
         //system("pause");
         exit(-1);
