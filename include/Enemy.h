@@ -62,11 +62,11 @@ protected:
 
 private:
 
-    enemyStyle enemyNo;
+    sf::Vector2f speed;
 
     static std::list<Bullet> ammo;
 
-    sf::Vector2f speed;
+    enemyStyle enemyNo;
 
     int deadCounter;
     /*

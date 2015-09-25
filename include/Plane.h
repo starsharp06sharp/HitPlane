@@ -7,7 +7,7 @@
 class Plane : public Moveable {
 public:
 
-    Plane() {}
+    Plane() = default;
 
     Plane(
         sf::IntRect aeraToDisplay,

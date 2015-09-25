@@ -9,7 +9,7 @@
 class Moveable : public sf::Sprite {
 public:
 
-    Moveable() {}
+    Moveable() = default;
 
     Moveable(
         sf::IntRect aeraToDisplay,

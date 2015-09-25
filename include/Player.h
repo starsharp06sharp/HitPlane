@@ -14,7 +14,7 @@ class Enemy;
 class Player : public Plane {
 public:
 
-    Player() {}
+    Player() = default;
 
     Player(
         sf::IntRect aeraToDisplay,
