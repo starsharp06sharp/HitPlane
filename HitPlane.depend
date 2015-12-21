@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1450706001 source:d:\runtimeerror\hitplane\main.cpp
+1450712530 source:d:\runtimeerror\hitplane\main.cpp
 	"Sky.h"
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics.hpp
@@ -30,6 +30,8 @@
 	<SFML/Graphics/VertexArray.hpp>
 	<SFML/Graphics/View.hpp>
 
+1429780453 hics/View.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\window.hpp
 	<SFML/System.hpp>
 	<SFML/Window/Context.hpp>
@@ -44,6 +46,8 @@
 	<SFML/Window/Window.hpp>
 	<SFML/Window/WindowHandle.hpp>
 	<SFML/Window/WindowStyle.hpp>
+
+1429780453 ow/WindowStyle.hpp>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system.hpp
 	<SFML/Config.hpp>
@@ -65,22 +69,34 @@
 	<SFML/System/Vector2.hpp>
 	<SFML/System/Vector3.hpp>
 
+1429780453 em/Vector3.hpp>
+
 1430987944 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\config.hpp
 	"TargetConditionals.h"
+
+1430987944 ditionals.h"
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\clock.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/Time.hpp>
 
+1430987944 em/Time.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\export.hpp
 	<SFML/Config.hpp>
+
+1429780453 ig.hpp>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\time.hpp
 	<SFML/System/Export.hpp>
 
+1429780453 em/Export.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\err.hpp
 	<SFML/System/Export.hpp>
 	<ostream>
+
+1450712530 
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\fileinputstream.hpp
 	<SFML/Config.hpp>
@@ -100,6 +116,8 @@
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\lock.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/NonCopyable.hpp>
+
+1429780453 em/NonCopyable.hpp>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\memoryinputstream.hpp
 	<SFML/Config.hpp>
@@ -122,6 +140,8 @@
 	<string>
 	<SFML/System/String.inl>
 
+1429780453 em/String.inl>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\utf.hpp
 	<SFML/Config.hpp>
 	<algorithm>
@@ -129,6 +149,8 @@
 	<string>
 	<cstdlib>
 	<SFML/System/Utf.inl>
+
+1429780453 em/Utf.inl>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\utf.inl
 
@@ -139,6 +161,8 @@
 	<SFML/System/NonCopyable.hpp>
 	<cstdlib>
 	<SFML/System/Thread.inl>
+
+1429780453 em/Thread.inl>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\thread.inl
 
@@ -151,15 +175,21 @@
 	<SFML/System/ThreadLocal.hpp>
 	<SFML/System/ThreadLocalPtr.inl>
 
+1429780453 em/ThreadLocalPtr.inl>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\threadlocalptr.inl
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\vector2.hpp
 	<SFML/System/Vector2.inl>
 
+1429780453 em/Vector2.inl>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\vector2.inl
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\vector3.hpp
 	<SFML/System/Vector3.inl>
+
+1429780453 em/Vector3.inl>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\system\vector3.inl
 
@@ -175,6 +205,8 @@
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\window\glresource.hpp
 	<SFML/Window/Export.hpp>
 
+1429780453 ow/Export.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\window\contextsettings.hpp
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\window\event.hpp
@@ -184,9 +216,13 @@
 	<SFML/Window/Mouse.hpp>
 	<SFML/Window/Sensor.hpp>
 
+1429780453 ow/Sensor.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\window\joystick.hpp
 	<SFML/Window/Export.hpp>
 	<SFML/System/String.hpp>
+
+1429780453 em/String.hpp>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\window\keyboard.hpp
 	<SFML/Window/Export.hpp>
@@ -194,6 +230,8 @@
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\window\mouse.hpp
 	<SFML/Window/Export.hpp>
 	<SFML/System/Vector2.hpp>
+
+1429780453 em/Vector2.hpp>
 
 1430987944 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\window\sensor.hpp
 	<SFML/Window/Export.hpp>
@@ -228,12 +266,16 @@
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\blendmode.hpp
 	<SFML/Graphics/Export.hpp>
 
+1430987944 hics/Export.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\export.hpp
 	<SFML/Config.hpp>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\circleshape.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Shape.hpp>
+
+1429780453 hics/Shape.hpp>
 
 1430987944 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\shape.hpp
 	<SFML/Graphics/Export.hpp>
@@ -246,10 +288,14 @@
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/RenderStates.hpp>
 
+1429780453 hics/RenderStates.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\renderstates.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/BlendMode.hpp>
 	<SFML/Graphics/Transform.hpp>
+
+1429780453 hics/Transform.hpp>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\transform.hpp
 	<SFML/Graphics/Export.hpp>
@@ -260,6 +306,8 @@
 	<SFML/System/Vector2.hpp>
 	<algorithm>
 	<SFML/Graphics/Rect.inl>
+
+1429780453 hics/Rect.inl>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\rect.inl
 
@@ -305,10 +353,14 @@
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Rect.hpp>
 
+1430987944 hics/Rect.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\texture.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Image.hpp>
 	<SFML/Window/GlResource.hpp>
+
+1429780453 ow/GlResource.hpp>
 
 1430987944 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\image.hpp
 	<SFML/Graphics/Export.hpp>
@@ -343,6 +395,8 @@
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Texture.hpp>
 	<SFML/Graphics/RenderTarget.hpp>
+
+1429780453 hics/RenderTarget.hpp>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\graphics\renderwindow.hpp
 	<SFML/Graphics/Export.hpp>
@@ -396,6 +450,8 @@
 	<SFML/Audio/SoundSource.hpp>
 	<SFML/Audio/SoundStream.hpp>
 
+1429780453 o/SoundStream.hpp>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\audio\inputsoundfile.hpp
 	<SFML/Audio/Export.hpp>
 	<SFML/System/NonCopyable.hpp>
@@ -433,6 +489,8 @@
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\audio\alresource.hpp
 	<SFML/Audio/Export.hpp>
+
+1429780453 o/Export.hpp>
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\audio\outputsoundfile.hpp
 	<SFML/Audio/Export.hpp>
@@ -473,6 +531,8 @@
 	<vector>
 	<SFML/Audio/SoundFileFactory.inl>
 
+1429780453 o/SoundFileFactory.inl>
+
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\audio\soundfilefactory.inl
 
 1429780453 c:\program files (x86)\codeblocks\sfml-2.3\include\sfml\audio\soundfilereader.hpp
@@ -483,33 +543,35 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1443116913 source:d:\runtimeerror\hitplane\src\moveable.cpp
+1450712531 source:d:\runtimeerror\hitplane\src\moveable.cpp
 	"Moveable.h"
 
-1443202316 d:\runtimeerror\hitplane\include\moveable.h
+1450712530 h"
+
+1450712530 d:\runtimeerror\hitplane\include\moveable.h
 	<SFML/Graphics.hpp>
 	<stdlib.h>
 	"constDef.h"
 
-1443116714 source:d:\runtimeerror\hitplane\src\bullet.cpp
+1450712531 source:d:\runtimeerror\hitplane\src\bullet.cpp
 	"Bullet.h"
 
-1433778479 d:\runtimeerror\hitplane\include\bullet.h
+1450712530 d:\runtimeerror\hitplane\include\bullet.h
 	<SFML/Audio.hpp>
 	"constDef.h"
 	"Moveable.h"
 
-1434964552 source:d:\runtimeerror\hitplane\src\plane.cpp
+1450712531 source:d:\runtimeerror\hitplane\src\plane.cpp
 	"Plane.h"
 
-1443202336 d:\runtimeerror\hitplane\include\plane.h
+1450712530 d:\runtimeerror\hitplane\include\plane.h
 	"constDef.h"
 	"Moveable.h"
 
-1443116995 source:d:\runtimeerror\hitplane\src\player.cpp
+1450712531 source:d:\runtimeerror\hitplane\src\player.cpp
 	"Player.h"
 
-1450709965 d:\runtimeerror\hitplane\include\player.h
+1450712530 d:\runtimeerror\hitplane\include\player.h
 	<list>
 	<functional>
 	<SFML/Graphics.hpp>
@@ -518,21 +580,21 @@
 	"Bullet.h"
 	"Enemy.h"
 
-1443116828 source:d:\runtimeerror\hitplane\src\enemy.cpp
+1450712531 source:d:\runtimeerror\hitplane\src\enemy.cpp
 	<cmath>
 	"Enemy.h"
 
-1443202779 d:\runtimeerror\hitplane\include\enemy.h
+1450712530 d:\runtimeerror\hitplane\include\enemy.h
 	<list>
 	<cmath>
 	"Player.h"
 	"Plane.h"
 	"Bullet.h"
 
-1450709472 source:d:\runtimeerror\hitplane\src\sky.cpp
+1450712531 source:d:\runtimeerror\hitplane\src\sky.cpp
 	"Sky.h"
 
-1450706077 d:\runtimeerror\hitplane\include\sky.h
+1450712530 d:\runtimeerror\hitplane\include\sky.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<stdio.h>
@@ -546,6 +608,8 @@
 	"Enemy.h"
 	"Enemies.h"
 	"Message.h"
+
+1450712531 "
 
 1433779878 source:d:\runtimeerror\hitplane\gamefunc.cpp
 	"gameFunc.h"
@@ -561,7 +625,7 @@
 	"Player.h"
 	"Enemy.h"
 
-1450709420 d:\runtimeerror\hitplane\include\enemies.h
+1450712530 d:\runtimeerror\hitplane\include\enemies.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<list>
@@ -571,15 +635,104 @@
 	"Player.h"
 	"Enemy.h"
 
-1450709453 source:d:\runtimeerror\hitplane\src\enemies.cpp
+1450712531 source:d:\runtimeerror\hitplane\src\enemies.cpp
 	"Enemies.h"
 
-1434470845 d:\runtimeerror\hitplane\include\constdef.h
+1450712530 d:\runtimeerror\hitplane\include\constdef.h
 
-1434962800 d:\runtimeerror\hitplane\include\message.h
+1450712530 d:\runtimeerror\hitplane\include\message.h
 	<SFML/Graphics.hpp>
 	"constDef.h"
 
-1434962810 source:d:\runtimeerror\hitplane\src\message.cpp
+1450712531 source:d:\runtimeerror\hitplane\src\message.cpp
 	"Message.h"
+
+1450712530 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/main.cpp
+	"Sky.h"
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/Sky.h
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<stdio.h>
+	<list>
+	<ctime>
+	<iostream>
+	"Moveable.h"
+	"Plane.h"
+	"Bullet.h"
+	"Player.h"
+	"Enemy.h"
+	"Enemies.h"
+	"Message.h"
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/Moveable.h
+	<SFML/Graphics.hpp>
+	<stdlib.h>
+	"constDef.h"
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/constDef.h
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/Plane.h
+	"constDef.h"
+	"Moveable.h"
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/Bullet.h
+	<SFML/Audio.hpp>
+	"constDef.h"
+	"Moveable.h"
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/Player.h
+	<list>
+	<functional>
+	<SFML/Graphics.hpp>
+	"constDef.h"
+	"Plane.h"
+	"Bullet.h"
+	"Enemy.h"
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/Enemy.h
+	<list>
+	<cmath>
+	"Player.h"
+	"Plane.h"
+	"Bullet.h"
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/Enemies.h
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<list>
+	"Moveable.h"
+	"Plane.h"
+	"Bullet.h"
+	"Player.h"
+	"Enemy.h"
+
+1450712530 /media/leiz/0000678400004823/RunTimeError/HitPlane/include/Message.h
+	<SFML/Graphics.hpp>
+	"constDef.h"
+
+1450712531 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/src/Bullet.cpp
+	"Bullet.h"
+
+1450712531 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/src/Enemies.cpp
+	"Enemies.h"
+
+1450712531 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/src/Enemy.cpp
+	<cmath>
+	"Enemy.h"
+
+1450712531 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/src/Message.cpp
+	"Message.h"
+
+1450712531 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/src/Moveable.cpp
+	"Moveable.h"
+
+1450712531 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/src/Plane.cpp
+	"Plane.h"
+
+1450712531 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/src/Player.cpp
+	"Player.h"
+
+1450718394 source:/media/leiz/0000678400004823/RunTimeError/HitPlane/src/Sky.cpp
+	"Sky.h"
 

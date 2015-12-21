@@ -325,7 +325,7 @@ Message
 Sky::getScore( void )
 {
     wchar_t scoreStr[40];
-    swprintf( scoreStr, L"Score : %I64u", score );
+    swprintf( scoreStr, 40, L"Score : %llu", score );
     Message scoreMessage(
         scoreStr,
         this->scoreFont,
@@ -368,7 +368,7 @@ Sky::getLevel( void )
         level = nowLevel;
     }
     wchar_t levelStr[40];
-    swprintf( levelStr, L"Level:%u", level );
+    swprintf( levelStr, 40, L"Level:%u", level );
 
     Message levelMessage(
         levelStr,

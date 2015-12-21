@@ -16,12 +16,6 @@
 					<Add option="-g" />
 					<Add directory="include" />
 				</Compiler>
-				<Linker>
-					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-audio-d.a" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-graphics-d.a" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-window-d.a" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-system-d.a" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/HitPlane" prefix_auto="1" extension_auto="1" />
@@ -34,20 +28,15 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-audio.a" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-graphics.a" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-window.a" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\SFML-2.3\lib\libsfml-system.a" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
-			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.3/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.3/lib" />
+			<Add option="-lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system" />
 		</Linker>
 		<Unit filename="include/Bullet.h" />
 		<Unit filename="include/Enemies.h" />
