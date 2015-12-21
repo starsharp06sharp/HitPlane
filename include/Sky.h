@@ -20,7 +20,7 @@
 class Sky : public sf::RenderWindow {
 public:
 
-    Sky();
+    static Sky* getInstance();
 
     bool
     showStartInterface( void );
@@ -31,6 +31,10 @@ public:
 protected:
 
 private:
+
+    Sky();
+
+    static Sky* instance;
 
     void
     pause(

@@ -3,10 +3,10 @@
 float nowSCALE = SCALE;
 
 int main( void ) {
-    Sky sky;
+    Sky* sky = Sky::getInstance();
 
-    if ( sky.showStartInterface() ) {
-        while( sky.mainLoop() )
+    if ( sky -> showStartInterface() ) {
+        while( sky -> mainLoop() )
             ;
     }
 

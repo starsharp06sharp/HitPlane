@@ -1,5 +1,7 @@
 #include "Sky.h"
 
+Sky* Sky::instance = nullptr;
+
 Sky::Sky() :
     sf::RenderWindow(
         sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y),
@@ -11,6 +13,15 @@ Sky::Sky() :
     this->initMusic();
     this->initFont();
     Moveable::initTexture();
+}
+
+Sky* Sky::getInstance()
+{
+    if ( Sky::instance == nullptr ) {
+        Sky::instance = new Sky;
+    }
+
+    return Sky::instance;
 }
 
 void
@@ -399,13 +410,16 @@ Sky::drawGameInterface(
     this->draw( this->spriteBackground );
 
     //Draw all enemy
-    enemies.draw( *this );
+    this->draw( enemies );
 
     //Draw all enemy bullet
     Enemy::drawAllBullet( *this );
 
-    //Draw all player bullet and player itself
-    player.draw( *this );
+    //Draw player
+    this->draw(player);
+
+    //Draw all player bullet
+    player.drawAllBullet( *this );
 
     //Draw score
     this->draw( this->getScore() );

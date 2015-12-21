@@ -123,14 +123,11 @@ Player::flash( void )
 }
 
 void
-Player::draw(
-    sf::RenderWindow& window
-    )
+Player::drawAllBullet( sf::RenderWindow& window )
 {
-    for( auto &bullet : ammo ){
+    for( auto &bullet : ammo ) {
         window.draw( bullet );
     }
-    window.draw( *this );
 }
 
 bool

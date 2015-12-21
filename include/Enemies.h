@@ -12,7 +12,7 @@
 #include "Enemy.h"
 
 
-class Enemies {
+class Enemies : public sf::Drawable {
 public:
     Enemies();
 
@@ -34,14 +34,15 @@ public:
         Player& player
         );
 
-    void
-    draw(
-        sf::RenderWindow& window
-        );
-
 protected:
 
 private:
+
+    virtual void
+    draw(
+        sf::RenderTarget& target,
+        sf::RenderStates states
+        ) const;
 
     std::list<Enemy> enemies;
 

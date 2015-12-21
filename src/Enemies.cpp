@@ -93,10 +93,11 @@ Enemies::hit(
 
 void
 Enemies::draw(
-    sf::RenderWindow& window
-    )
+    sf::RenderTarget& target,
+    sf::RenderStates states
+    ) const
 {
-    for( auto &enemy : enemies ){
-        window.draw( enemy );
+    for ( auto& enemy : this->enemies ) {
+        target.draw( enemy, states );
     }
 }

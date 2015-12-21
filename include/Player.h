@@ -53,6 +53,9 @@ public:
     void
     addLife( void );
 
+    void
+    drawAllBullet( sf::RenderWindow& window );
+
 protected:
 
 private:

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.2">
+<diagram program="umlet" version="13.3">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>320</y>
+      <x>10</x>
+      <y>90</y>
       <w>210</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>_/Moveable/_
+    <panel_attributes>/Moveable/
 --
 /void flash()/
 /bool isDisappear()/
 void resize( float preSCALE )
-_void initTexture()_</panel_attributes>
+void initTexture()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>460</y>
+      <x>380</x>
+      <y>290</y>
       <w>260</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>_Plane_
+    <panel_attributes>Plane
 --
 /void move()/
 /void setPosition( sf::Vector2f position )/
@@ -41,34 +41,34 @@ int getLife()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>200</x>
-      <y>360</y>
+      <x>210</x>
+      <y>130</y>
       <w>210</w>
-      <h>120</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;190.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;190.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>460</y>
+      <x>10</x>
+      <y>230</y>
       <w>210</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>_Bullet_
 --
 bool hit( sf::FloatRect target )
-_void initSound()_
+void initSound()
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>90</x>
-      <y>410</y>
+      <x>100</x>
+      <y>180</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -78,44 +78,44 @@ _void initSound()_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>680</y>
+      <x>380</x>
+      <y>510</y>
       <w>260</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>_Player_
+    <panel_attributes>Player
 --
 bool hitEnemy( Enemy&amp; enemy )
 void draw( sf::RenderWindow&amp; window )
 void addLife()
-_void initSound()_
+void initSound()
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>660</x>
-      <y>680</y>
+      <x>670</x>
+      <y>510</y>
       <w>310</w>
       <h>140</h>
     </coordinates>
-    <panel_attributes>_Enemy_
+    <panel_attributes>Enemy
 --
 enemyStyle getEnemyNo()
-_bool hitPlayer( Player&amp; player )_
-_void flashAmmo()_
-_void drawAllBullet( sf::RenderWindow&amp; window )_
-_void initSound()_
-_void clearBullet()_
+bool hitPlayer( Player&amp; player )
+void flashAmmo()
+void drawAllBullet( sf::RenderWindow&amp; window )
+void initSound()
+void clearBullet()
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>630</y>
+      <x>500</x>
+      <y>460</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -125,23 +125,23 @@ _void clearBullet()_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>620</x>
-      <y>470</y>
-      <w>210</w>
+      <x>630</x>
+      <y>300</y>
+      <w>200</w>
       <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;190.0;210.0</additional_attributes>
+    <additional_attributes>10.0;10.0;180.0;210.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>250</y>
+      <x>10</x>
+      <y>20</y>
       <w>210</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_sf::Sprite_
+    <panel_attributes>sf::Sprite
 --
 
 </panel_attributes>
@@ -150,8 +150,8 @@ _void clearBullet()_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>90</x>
-      <y>270</y>
+      <x>100</x>
+      <y>40</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -161,14 +161,14 @@ _void clearBullet()_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>320</y>
+      <x>690</x>
+      <y>150</y>
       <w>270</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>_Enemies_
+    <panel_attributes>Enemies
 --
-void addEnemy( unsigned level 
+void addEnemy( unsigned level )
 void flashAll( Player&amp; player )
 bool hit( Player&amp; player )
 unsigned judge( Player&amp; player )
@@ -179,24 +179,29 @@ void draw( sf::RenderWindow&amp; window )
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>430</y>
-      <w>30</w>
+      <x>820</x>
+      <y>260</y>
+      <w>160</w>
       <h>270</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+list&lt;Enemy&gt; enemies</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;250.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>190</y>
+      <x>380</x>
+      <y>120</y>
       <w>260</w>
-      <h>70</h>
+      <h>120</h>
     </coordinates>
-    <panel_attributes>_Sky_
+    <panel_attributes>Sky
 --
+- Sky()
+- static Sky* instance
+--
+static Sky* getInstance()
 bool showStartInterface()
 bool mainLoop()</panel_attributes>
     <additional_attributes/>
@@ -204,23 +209,130 @@ bool mainLoop()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>250</y>
+      <x>500</x>
+      <y>230</y>
       <w>30</w>
-      <h>230</h>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>370</y>
+      <w>210</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>sf::Text
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>450</y>
+      <w>210</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Message
+--
+Message(const wchar_t* str,
+sf::Font&amp; font, int size,
+sf::Color color, int position);
+
+Message(const wchar_t* str,
+sf::Font&amp; font,int size,
+sf::Color color,int driection,
+Message&amp; reference);
+</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>620</x>
-      <y>220</y>
-      <w>210</w>
-      <h>120</h>
+      <x>100</x>
+      <y>390</y>
+      <w>30</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;190.0;100.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>50</y>
+      <w>260</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>sf::RenderWindow
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>180</y>
+      <w>80</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>60.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>70</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>690</x>
+      <y>20</y>
+      <w>270</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>sf::Sprite
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>20</y>
+      <w>500</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>480.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>40</y>
+      <w>30</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
   </element>
 </diagram>
