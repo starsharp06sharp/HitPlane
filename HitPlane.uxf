@@ -307,7 +307,7 @@ Message&amp; reference);
       <w>270</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>sf::Sprite
+    <panel_attributes>sf::Drawable
 --
 
 </panel_attributes>
